@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CART_SAVE_FROM_DB } from "../Constants/CartConstants";
 import { ORDER_GET_ALL_USER_ORDER_RESET } from "../Constants/OrderConstants";
 import { USER_INFO_FAIL, USER_INFO_REQUEST, USER_INFO_RESET, USER_INFO_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../Constants/UserConstants"
 import { URL } from "../URL";
@@ -32,8 +33,31 @@ export const login = (email, password) => async (dispatch) => {
 }
 
 //LOGOUT
-export const logout = () => (dispatch) => {
+export const logout = () => async (dispatch, getState) => {
+    const { userLogin: { userInfo }
+    } = getState();
+    const userID = userInfo._id
+    //save cart to db
+    const { cart: {cartItems}
+    } = getState()
+    // console.log(cartItems)
+    const config = {
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${userInfo.token}`,
+        },
+    }; 
+    await axios.post(
+        `${URL}/api/cart/save`,
+        {
+            userID,
+            cartItems
+        },
+        config
+    )
+
     localStorage.removeItem("userInfo");
+    // localStorage.removeItem("cartItems")
     dispatch({type: USER_LOGOUT});
     dispatch({type: USER_INFO_RESET});
     dispatch({type: ORDER_GET_ALL_USER_ORDER_RESET});

@@ -9,21 +9,22 @@ import babymomProducts from "./data/Products/babymom.js";
 import ImportData from "./DataImport.js";
 import manclothesProducts from "./data/Products/manclothesProducts.js";
 import toysProducts from "./data/Products/toys.js"
-// import connectDatabase from "./config/MongoDB.js";
-// import productRoute from "./Routes/ProductRoutes.js";
-// import {errorHandler, notFound} from "./Middleware/Errors.js"
-// import orderRouter from "./Routes/OrderRoutes.js";
-// import cors from "cors";
+import productRoute from "./Routes/ProductRoutes.js";
+import {errorHandler, notFound} from "./Middleware/Errors.js"
+import orderRouter from "./Routes/OrderRoutes.js";
+import cors from "cors";
+import cartRouter from "./Routes/CartRoutes.js";
+import ClearData from "./ClearData.js";
 
 dotenv.config();
 connectDatabase();
 const app = express();
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
 //Test 
 app.get("/", (req, res) => {
-    res.send("API is Running");
+    res.send("Hello, API is Running");
 });
 
 //API Test
@@ -76,22 +77,28 @@ app.get("/", (req, res) => {
 // app.use("/api/import", ImportData);
 
 //DATA from MONGDODB
-// app.use("/api/products", productRoute);
+app.use("/api/products", productRoute);
 
 // API User
 app.use("/api/users", userRouter);
 
 //API Orders
-// app.use("/api/orders", orderRouter);
+app.use("/api/orders", orderRouter);
+
+//API Cart
+app.use("/api/cart", cartRouter);
 
 //PAYPAL SANDBOXS
 // app.get("/api/config/paypal", (req, res) => {
 //     res.send(process.env.PAYPAL_CLIENT_ID);
 // })
 
+//API CLEAR
+app.use("/api/clear", ClearData);
+
 //ERROR HANDLER
-// app.use(notFound);
-// app.use(errorHandler);
+app.use(notFound);
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5050;
 

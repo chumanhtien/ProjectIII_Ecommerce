@@ -7,3 +7,4 @@ export const PAYMENT_METHOD = [
     {id: 1, name: "Paypal"},
     {id: 2, name: "Offline"},
 ]
+export const CART_SAVE_FROM_DB = "CART_SAVE_FROM_DB"

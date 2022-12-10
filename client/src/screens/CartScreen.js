@@ -30,7 +30,7 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const {cartItems} = cart;
-  // console.log(cart);
+  console.log(cart);
   const navigate = useNavigate();
 
   const total = cartItems.reduce((a, i) => a + i.qty * i.price, 0).toFixed(2);

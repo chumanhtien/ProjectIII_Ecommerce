@@ -6,6 +6,7 @@ import {useNavigate} from "react-router"
 import { getAllProducts, getListCategories } from "../Redux/Actions/ProductActions";
 import Loading from "./LoadingError/Loading";
 import Message from "./LoadingError/Error";
+import { saveCartStateFromDB } from "../Redux/Actions/CartActions";
 
 const Header = () => {
 
@@ -40,6 +41,12 @@ const Header = () => {
       navigate(`/`);
     }
   }
+
+  useEffect(() => {
+    if (userInfo?._id) {
+      dispatch(saveCartStateFromDB(userInfo._id))
+    }
+  }, [])
   return (
     <div>
       {/* Top Header */}
@@ -133,7 +140,7 @@ const Header = () => {
                   
                   <Link to="/cart" className="cart-mobile-icon">
                     <i className="fas fa-shopping-bag"></i>
-                    <span className="badge">{cartItems.length}</span>
+                    <span className="badge">{userInfo && cartItems.length}</span>
                   </Link>
                 </div>
                 
@@ -273,7 +280,7 @@ const Header = () => {
 
                 <Link to="/cart">
                   <i className="fas fa-shopping-bag"></i>
-                  <span className="badge">{cartItems.length}</span>
+                  <span className="badge">{userInfo && cartItems.length}</span>
                 </Link>
               </div>
             </div>

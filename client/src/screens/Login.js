@@ -39,7 +39,7 @@ const Login = () => {
   useEffect(() => {
     if (success) {
       toast.success("Đăng ký tài khoản thành công. Mời bạn Đăng nhập", ToastObjects);
-      dispatch({type: USER_REGISTER_RESET});
+      dispatch({ type: USER_REGISTER_RESET });
     }
   }, [dispatch, success]);
   

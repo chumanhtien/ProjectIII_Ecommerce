@@ -1,7 +1,7 @@
 import asyncHandler from "express-async-handler";
 
-const UserController = {
-  login:
+export default UserController = () => {
+  const login = () =>
     asyncHandler(async (req, res) => {
         const {email, password} = req.body;
 
@@ -38,4 +38,3 @@ const UserController = {
     })
 }
 
-export default UserController;

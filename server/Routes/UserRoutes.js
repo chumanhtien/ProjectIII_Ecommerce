@@ -3,48 +3,49 @@ import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "./../Models/UserModel.js";
 import { protect, admin } from "../Middleware/AuthMiddleware.js"
-import UserController from "../controllers/UserController.js";
+import Cart from "../Models/CartModel.js";
+// import UserController from "../controllers/UserController.js";
 // import moment from "moment"
 const userRouter = express.Router();
 
 // LOGIN
 userRouter.post(
     "/login",
-    UserController.login
-    // asyncHandler(async (req, res) => {
-    //     const {email, password} = req.body;
+    // UserController.login
+    asyncHandler(async (req, res) => {
+        const {email, password} = req.body;
 
-    //     // console.log(email, password)
-    //     const user = await User.findOne({email});
-    //     // console.log(user);
+        // console.log(email, password)
+        const user = await User.findOne({email});
+        // console.log(user);
 
-    //     if (user && (await user.matchPassword(password))) {
-    //         if (user.isBlocked) {
-    //             res.status(402);
-    //             throw new Error(`Tài khoản của bạn đã bị Khóa vào ${moment(user.isBlockedAt).format("llll")}. Vui lòng quay lại sau!`)
-    //         } else {
-    //             res.json({
-    //                 _id: user._id,
-    //                 name: user.name,
-    //                 email: user.email,
-    //                 isAdmin: user.isAdmin,
-    //                 isBlocked: user.isBlocked,
-    //                 token: generateToken(user._id),
-    //                 createdAt: user.createdAt,
-    //             });
-    //         }
-    //     } else {
-    //         res.status(401);
-    //         if (!user) {
-    //             throw new Error("Tài khoản Email này không tồn tại");
-    //             // throw new Error("Username is not exist");
-    //         }
-    //         else if (!await user.matchPassword(password)) {
-    //             throw new Error("Sai mật khẩu");
-    //             // throw new Error("Wrong password");
-    //         }
-    //     }
-    // })
+        if (user && (await user.matchPassword(password))) {
+            if (user.isBlocked) {
+                res.status(402);
+                throw new Error(`Tài khoản của bạn đã bị Khóa vào ${moment(user.isBlockedAt).format("llll")}. Vui lòng quay lại sau!`)
+            } else {
+                res.json({
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                    isBlocked: user.isBlocked,
+                    token: generateToken(user._id),
+                    createdAt: user.createdAt,
+                });
+            }
+        } else {
+            res.status(401);
+            if (!user) {
+                throw new Error("Tài khoản Email này không tồn tại");
+                // throw new Error("Username is not exist");
+            }
+            else if (!await user.matchPassword(password)) {
+                throw new Error("Sai mật khẩu");
+                // throw new Error("Wrong password");
+            }
+        }
+    })
 );
 
 // REGISTER
@@ -68,14 +69,22 @@ userRouter.post(
         });
 
         if (user) {
-            res.status(201).json({
-               _id: user._id,
-               name: user.name,
-               email: user.email,
-               isAdmin: user.isAdmin,
-               token: generateToken(user._id),
-               createdAt: user.createdAt 
-            });
+            const cart = await Cart.create({
+                userID: user._id,
+                cartItems: []
+            })
+            if (cart) {
+                res.status(201).json({
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                    token: generateToken(user._id),
+                    cart: cart,
+                    createdAt: user.createdAt 
+                });
+            }
+            
         }
         else {
             res.status(400);
@@ -268,13 +277,13 @@ userRouter.post(
         });
 
         if (user) {
-            res.status(201).json({
-               _id: user._id,
-               name: user.name,
-               email: user.email,
-               isAdmin: user.isAdmin,
-               isBlocked: user.isBlocked,
-               token: generateToken(user._id),
+                res.status(201).json({
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    isAdmin: user.isAdmin,
+                    isBlocked: user.isBlocked,
+                    token: generateToken(user._id),
                createdAt: user.createdAt 
             });
         }
