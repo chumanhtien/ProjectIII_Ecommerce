@@ -261,11 +261,13 @@ const SingleProduct = (props) => {
                           <tr>
                             <td>{`Màu sắc: `} 
                               <span className="product-info-detail">{`${product.productInfoDetail.colors.length} màu: `}</span>
+                              {product.productInfoDetail.colors.map((x, index) => (
+                                  <span className="product-info-detail" key={index}>{index < product.productInfoDetail.colors.length - 1 ? `${x} | ` : `${x}` }</span>))}
                               <br/>
-                            <ul className="product-info-detail">
+                            {/* <ul className="product-info-detail">
                               {product.productInfoDetail.colors.map((x, index) => (
                               <li key={index}>{x}</li>))}
-                            </ul> 
+                            </ul>  */}
                             </td>
                             
                           </tr>
@@ -395,7 +397,7 @@ const SingleProduct = (props) => {
                     </div>
                   </div>
                 </div>
-                    </div>
+              </div>
 
             {/* RATING */}
               <div className="row my-5">

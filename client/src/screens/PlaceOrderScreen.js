@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // import { PAYMENT_METHOD } from "../Redux/Constants/CartConstants";
@@ -12,10 +12,13 @@ import CalltoActionSection from "../components/homeComponents/CalltoActionSectio
 import ContactInfo from "../components/homeComponents/ContactInfo";
 import Footer from "../components/Footer";
 import { CurrencyFormatter } from "../components/converterComponents/CurrencyFormatter";
+import AddVoucherModal from "../components/modals/AddVoucherModal";
 
 
 const PlaceOrderScreen = () => {
   window.scrollTo(0, 0);
+
+  const [showModal, setShowModal] = useState(false)
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -133,8 +136,6 @@ const PlaceOrderScreen = () => {
                 <p>
                   Địa chỉ: {cart.shippingAddress.address}, {cart.shippingAddress.city}.
                 </p>
-
-                
               </div>
             </div>
           </div>
@@ -213,19 +214,31 @@ const PlaceOrderScreen = () => {
                 </tr>
                 <tr>
                   <td>
+                    <strong>Mã Giảm giá: </strong>
+                  </td>
+                  <td style={{"color": "red"}}>
+                    {CurrencyFormatter(-100000000)}
+                    {/* <CurrencyFormat value={cart.taxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
                     <strong style={{"color": "#1cb803"}}>Tổng cộng</strong>
                   </td>
-                  <td>
+                  <td >
                     {CurrencyFormatter(cart.totalPrice)}
                     {/* <CurrencyFormat value={cart.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <b>{value}</b>} /> */}
                   </td>
                 </tr>
               </tbody>
             </table>
+            <button type="button" className="btn-add-voucher" onClick={() => setShowModal(true)}>
+              <b>Thêm mã giảm giá</b>
+            </button>
             {
               cart.cartItems.length === 0 ? null : (
-                <button type="submit" onClick={placeOrderHandler}>
-                  <b style={{"font-size": "16px"}}>ĐẶT HÀNG</b>
+                <button className="" type="submit" onClick={placeOrderHandler}>
+                  <b>ĐẶT HÀNG</b>
                 </button>
               )
             }
@@ -236,15 +249,15 @@ const PlaceOrderScreen = () => {
                 </div>
               )
             }
-            
-            
           </div>
         </div>
       </div>
       <CalltoActionSection />
       <ContactInfo />
       <Footer />
+      {showModal && <AddVoucherModal showModal={showModal} setShowModal={setShowModal} />}
     </>
+    
   );
 };
 

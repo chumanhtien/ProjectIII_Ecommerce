@@ -87,7 +87,7 @@ const Header = () => {
               <div className="row ">
                 <div className="col-6 d-flex align-items-center">
                   <Link to="#" className="navbar-brand" onClick={goHomeHandler}>
-                    <img alt="logo" src="/images/logo.png" />
+                    <img alt="logo" src="/images/ecommerce-logo.png" />
                   </Link>
                 </div>
                 <div className="col-6 d-flex align-items-center justify-content-end Login-Register">
@@ -108,7 +108,7 @@ const Header = () => {
                             Thông tin
                           </Link>
 
-                          <Link className="dropdown-item" to="#" onClick={logoutHandler}>
+                          <Link className="dropdown-item" to="/" onClick={logoutHandler}>
                             Đăng xuất
                           </Link>
                         </div>
@@ -223,7 +223,7 @@ const Header = () => {
             <div className="row header_top">
               <div className="col-md-3 col-4 d-flex align-items-center" style={{"width":"18%"}}>
                 <Link to="#" className="navbar-brand" onClick={goHomeHandler}>
-                  <img alt="logo" src="/images/logo.png" />
+                  <img alt="logo" src="/images/ecommerce-logo.png" />
                 </Link>
               </div>
               <div className="col-md-6 col-8 d-flex align-items-center">
@@ -259,7 +259,7 @@ const Header = () => {
                           Thông tin cá nhân
                         </Link>
 
-                        <Link className="dropdown-item" to="#" onClick={logoutHandler}>
+                        <Link className="dropdown-item" to="/" onClick={logoutHandler}>
                           Đăng xuất
                         </Link>
                       </div>

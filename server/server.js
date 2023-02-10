@@ -74,7 +74,7 @@ app.get("/", (req, res) => {
 // }) ;
 
 //API Import
-// app.use("/api/import", ImportData);
+app.use("/api/import", ImportData);
 
 //DATA from MONGDODB
 app.use("/api/products", productRoute);
@@ -89,9 +89,9 @@ app.use("/api/orders", orderRouter);
 app.use("/api/cart", cartRouter);
 
 //PAYPAL SANDBOXS
-// app.get("/api/config/paypal", (req, res) => {
-//     res.send(process.env.PAYPAL_CLIENT_ID);
-// })
+app.get("/api/config/paypal", (req, res) => {
+    res.send(process.env.PAYPAL_CLIENT_ID);
+})
 
 //API CLEAR
 app.use("/api/clear", ClearData);

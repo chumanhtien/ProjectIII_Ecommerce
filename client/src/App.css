@@ -708,9 +708,22 @@ textarea:focus {
   padding: 15px 0;
   border: 0px;
   text-transform: uppercase;
-  font-size: 13px;
+  font-size: 16px;
   background-color: #1cb803;
   color: #ffffff;
+  margin-bottom: 5px;
+  border-radius: 3px;
+}
+.subtotal-order button:hover {
+  background-color: #138102;
+}
+.subtotal-order .btn-add-voucher {
+  background-color: #f0a927;
+  padding: 10px 0;
+  color: #000000
+}
+.subtotal-order .btn-add-voucher:hover {
+  background-color: #cb8605;
 }
 .order-item-price {
   text-align: left;

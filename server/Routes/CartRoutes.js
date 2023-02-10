@@ -104,6 +104,8 @@ cartRouter.post(
         return {
           productID: cartItem.productId,
           category: cartItem.category,
+          //name: cartItem.name,
+          //image: cartItem.image
           qty: cartItem.qty,
           color: cartItem.types.color,
           size: cartItem.types.size

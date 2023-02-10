@@ -177,7 +177,7 @@ const ShopSection = (props) => {
                         
                         <div className="shoptext">
                           <p>
-                            <Link className="text_name text-truncate" title={product.name} to={`/products/${category}/${product._id}`}>
+                            <Link className="text_name text-truncate" title={product.name} to={`/products/${product.category}/${product._id}`}>
                               {product.name}
                             </Link>
                           </p>

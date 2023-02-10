@@ -271,6 +271,15 @@ const OrderScreen = () => {
                       </tr>
                       <tr>
                         <td>
+                          <strong>Mã giảm giá</strong>
+                        </td>
+                        <td>
+                          {/* <CurrencyFormat value={order.taxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
+                          {CurrencyFormatter(order.taxPrice)}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
                           <strong style={{"color": "#1cb803"}}>Tổng cộng</strong>
                         </td>
                         <td>
