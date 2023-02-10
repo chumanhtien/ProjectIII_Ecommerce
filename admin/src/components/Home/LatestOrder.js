@@ -18,9 +18,9 @@ const LatestOrder = (props) => {
               orders.slice(0, 5).map((order, index) => (
                 <tr key={index}>
                   <td>
-                    <b>{order.user.name}</b>
+                    <b>{order?.user?.name}</b>
                   </td>
-                  <td>{order.user.email}</td>
+                  <td>{order?.user?.email}</td>
                   <td>{CurrencyFormatter(order.totalPrice)}</td>
                   <td>
                   {order.isPaid ? (

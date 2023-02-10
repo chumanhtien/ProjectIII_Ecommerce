@@ -56,8 +56,10 @@ const EditProfileScreen = () => {
                 email,
                 password
             }));
-            if(!toast.isActive(toastId.current)){ // Chi hien ra 1 Toast tai 1 thoi diem
-                toastId.current = toast.success("Thông tin Khách hàng đã được thay đổi", Toastobjects)
+            if (!toast.isActive(toastId.current)) { // Chi hien ra 1 Toast tai 1 thoi diem
+                if (successEdit) {
+                    toastId.current = toast.success("Thông tin Khách hàng đã được thay đổi", Toastobjects)
+                }
             }
         }
     }

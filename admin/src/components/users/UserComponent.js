@@ -32,10 +32,10 @@ const UserComponent = () => {
   const {loading, error, users} = userList;
 
   const userBlocked = useSelector((state) => state.userBlocked);
-  const {loading: loadingBlocked, success: successBlocked} = userBlocked;
+  const {loading: loadingBlocked, success: successBlocked, error: errorBlocked} = userBlocked;
 
   const userUnBlocked = useSelector((state) => state.userUnBlocked);
-  const {loading: loadingUnBlocked, success: successUnBlocked} = userUnBlocked;
+  const {loading: loadingUnBlocked, success: successUnBlocked, error: errorUnBlocked} = userUnBlocked;
 
   const userDeleteInfo = useSelector((state) => state.userDeleteInfo);
   const { success: successDelete} = userDeleteInfo;
@@ -47,16 +47,21 @@ const UserComponent = () => {
     if (successBlocked) {
       toast.warn("Bạn vừa khóa Người dùng!", ToastObjects);
       dispatch({type: USER_BLOCKED_RESET});
+    } else if (errorBlocked) {
+      toast.error(errorBlocked, ToastObjects);
     }
     if (successUnBlocked) {
       toast.success("Bạn vừa Mở khóa cho Người dùng!", ToastObjects);
       dispatch({type: USER_UNBLOCKED_RESET});
+    } else if (errorUnBlocked) {
+      toast.error(errorUnBlocked, ToastObjects);
     }
     if (successDelete) {
       toast.warn("Bạn vừa Xóa Người dùng!", ToastObjects);
-      dispatch({type: USER_ADMIN_DELETE_USER_RESET})
+      dispatch({ type: USER_ADMIN_DELETE_USER_RESET });
     }
-  }, [dispatch, successBlocked, successUnBlocked, successDelete]);
+    
+  }, [dispatch, successBlocked, successUnBlocked, successDelete, errorBlocked, errorUnBlocked, page]);
 
   const blockHandler = (id) => {
     dispatch(blockUser(id));

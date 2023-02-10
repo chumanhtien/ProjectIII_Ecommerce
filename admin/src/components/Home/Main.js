@@ -20,8 +20,8 @@ const Main = () => {
 
   
   const products = allProducts.products;
-  // if (products)
-  //   console.log("products", products);
+  if (products)
+    console.log("products", products);
   return (
     <>
       <section className="content-main">

@@ -63,92 +63,92 @@ const OrderDetailMain = (props) => {
           (
             <>
               <div className="card">
-                <header className="card-header p-3 Header-green">
-                  <div className="row align-items-center ">
-                    <div className="col-lg-6 col-md-6">
-                      <span>
-                        <i className="far fa-calendar-alt mx-2"></i>
-                        <b className="text-white">
-                          {moment(order.createdAt).format("llll")}
-                        </b>
-                      </span>
-                      <br />
-                      <small className="text-white mx-3 ">
-                        ID đơn hàng: {order._id}
-                      </small>
+                  <header className="card-header p-3 Header-green">
+                    <div className="row align-items-center ">
+                      <div className="col-lg-6 col-md-6">
+                        <span>
+                          <i className="far fa-calendar-alt mx-2"></i>
+                          <b className="text-white">
+                            {moment(order.createdAt).format("llll")}
+                          </b>
+                        </span>
+                        <br />
+                        <small className="text-white mx-3 ">
+                          ID đơn hàng: {order._id}
+                        </small>
+                      </div>
+                      <div className="col-lg-6 col-md-6 ms-auto d-flex justify-content-end align-items-center">
+                        <input
+                          type={"text"}
+                          className="form-select d-inline-block"
+                          style={{ maxWidth: "200px" }}
+                          disabled
+                          value={order.isDelivered ? "Đã giao" : order.isConfirmed ? "Đang giao hàng" : "Chờ xác nhận"}
+                        >
+                        </input>
+                        <Link className="btn btn-success ms-2" to="#">
+                          <i className="fas fa-print"></i>
+                        </Link>
+                      </div> 
                     </div>
-                    <div className="col-lg-6 col-md-6 ms-auto d-flex justify-content-end align-items-center">
-                      <input
-                        type={"text"}
-                        className="form-select d-inline-block"
-                        style={{ maxWidth: "200px" }}
-                        disabled
-                        value={order.isDelivered ? "Đã giao" : order.isConfirmed ? "Đang giao hàng" : "Chờ xác nhận"}
-                      >
-                      </input>
-                      <Link className="btn btn-success ms-2" to="#">
-                        <i className="fas fa-print"></i>
-                      </Link>
-                    </div> 
+                  </header>
+                <div className="card-body">
+              {/* Order info */}
+                  <OrderDetailInfo order={order}/>
+                  <div className="row">
+                    <div className="col-lg-9">
+                    {errorConfirmed && <Message variant={"alert-danger"}>{errorConfirmed}</Message>}
+                    {errorDelivered && <Message variant={"alert-danger"}>{errorDelivered}</Message>}
+                      <div className="table-responsive">
+                        <OrderDetailProducts order={order} loading={loading}/>
+                      </div>
+                    </div>
+                    
+                    {/* Payment Info */}
+                    <div className="col-lg-3">
+                      <div className="box shadow-sm bg-light">                
+                        {
+                          order.isConfirmed ? (
+                            <button className="btn btn-warning col-12">
+                              {order.isDelivered ? `ĐÃ XÁC NHẬN` : `ĐÃ XÁC NHẬN, ĐANG GIAO`}
+                            </button>
+                          ) : (
+                            <>
+                              {loadingConfirmed && <Loading/>} 
+                              <button
+                                onClick={confirmedHandler} 
+                                className="btn btn-danger col-12">
+                                XÁC NHẬN 
+                              </button>
+                            </>
+                            
+                          )
+                        }               
+                      </div>
+                      <div className="box shadow-sm bg-light">             
+                        {
+                          order.isDelivered ? (
+                            <button className="btn btn-success col-12">
+                              ĐÃ GIAO: ({" "} {moment(order.deliveredAt).format("llll")})
+                            </button>
+                          ) : (
+                            <>
+                              {loadingDelivered && <Loading/>} 
+                              <button
+                                onClick={deliveredHandler} 
+                                className="btn btn-primary col-12">
+                                <span>ĐÁNH DẤU ĐÃ GIAO</span>
+                              </button>
+                            </>
+                            
+                          )
+                        }
+                        
+                      </div>
+                    </div>
                   </div>
-                </header>
-              <div className="card-body">
-            {/* Order info */}
-            <OrderDetailInfo order={order}/>
-            <div className="row">
-              <div className="col-lg-9">
-              {errorConfirmed && <Message variant={"alert-danger"}>{errorConfirmed}</Message>}
-              {errorDelivered && <Message variant={"alert-danger"}>{errorDelivered}</Message>}
-                <div className="table-responsive">
-                  <OrderDetailProducts order={order} loading={loading}/>
                 </div>
               </div>
-              
-              {/* Payment Info */}
-              <div className="col-lg-3">
-                <div className="box shadow-sm bg-light">                
-                  {
-                    order.isConfirmed ? (
-                      <button className="btn btn-warning col-12">
-                        {order.isDelivered ? `ĐÃ XÁC NHẬN` : `ĐÃ XÁC NHẬN, ĐANG GIAO`}
-                      </button>
-                    ) : (
-                      <>
-                        {loadingConfirmed && <Loading/>} 
-                        <button
-                          onClick={confirmedHandler} 
-                          className="btn btn-danger col-12">
-                          XÁC NHẬN 
-                        </button>
-                      </>
-                      
-                    )
-                  }               
-                </div>
-                <div className="box shadow-sm bg-light">             
-                  {
-                    order.isDelivered ? (
-                      <button className="btn btn-success col-12">
-                        ĐÃ GIAO: ({" "} {moment(order.deliveredAt).format("llll")})
-                      </button>
-                    ) : (
-                      <>
-                        {loadingDelivered && <Loading/>} 
-                        <button
-                          onClick={deliveredHandler} 
-                          className="btn btn-primary col-12">
-                          <span>ĐÁNH DẤU ĐÃ GIAO</span>
-                        </button>
-                      </>
-                      
-                    )
-                  }
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
             </>
           )
         }

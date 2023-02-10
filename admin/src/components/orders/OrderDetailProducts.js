@@ -32,7 +32,7 @@ const OrderDetailProducts = (props) => {
           order.orderItems.map((orderItem, index) => (
             <tr key={index}>
               <td>
-                <Link className="itemside" to="#">
+                <Link className="itemside" to={`/products/${orderItem.category}/${orderItem.productId}`}>
                   <div className="left">
                     <img
                       src={orderItem.image}

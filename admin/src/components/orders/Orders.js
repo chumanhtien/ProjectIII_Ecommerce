@@ -63,13 +63,12 @@ const Orders = (props) => {
               
             </td>
             <td className="d-flex justify-content-end align-item-center">
-              <Link to={`/orders/orderinfo/${order._id}`} className="text-success">
+              <Link to={`/order/${order._id}`} className="text-success">
                 <i className="fas fa-eye"></i>
               </Link>
             </td>
           </tr>
         ))}
-        
       </tbody>
     </table>
   );

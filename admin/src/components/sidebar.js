@@ -11,8 +11,8 @@ const Sidebar = () => {
         <div className="aside-top">
           <Link to="#" className="brand-wrap"onClick={goHomeHandler}>
             <img
-              src="/images/logo.png"
-              style={{ height: "46" }}
+              src="/images/ecommerce-logo.png"
+              style={{ height: "50", width: "100" }}
               className="logo"
               alt="Ecommerce dashboard template"
             />
@@ -82,6 +82,16 @@ const Sidebar = () => {
               <NavLink
                 activeClassName="active"
                 className="menu-link disabled"
+                to="/news"
+              >
+                <i className="icon fas fa-newspaper"></i>
+                <span className="text">Tin tức</span>
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link disabled"
                 to="/staffs"
               >
                 <i className="icon fas fa-user"></i>
@@ -98,16 +108,7 @@ const Sidebar = () => {
                 <span className="text">Categories</span>
               </NavLink>
             </li>
-            <li className="menu-item">
-              <NavLink
-                activeClassName="active"
-                className="menu-link disabled"
-                to="/news"
-              >
-                <i className="icon fas fa-newspaper"></i>
-                <span className="text">Tin tức</span>
-              </NavLink>
-            </li>
+            
 
             <li className="menu-item">
               <NavLink

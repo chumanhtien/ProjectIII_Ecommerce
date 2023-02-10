@@ -4,7 +4,7 @@ import "./responsive.css";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/productScreen";
+import ProductScreen from "./screens/ProductScreen";
 import CategoriesScreen from "./screens/CategoriesScreen";
 import OrderScreen from "./screens/OrderScreen";
 import OrderDetailScreen from "./screens/OrderDetailScreen";
@@ -81,7 +81,7 @@ function App() {
             <Route path="/orders/:filter/page/:pageNumber" element={<OrderScreen/>} />
 
 
-            <Route path="/orders/orderinfo/:id" element={<OrderDetailScreen/>} />
+            <Route path="/order/:id" element={<OrderDetailScreen/>} />
             <Route path="/addproduct" element={<AddProduct/>} />
             <Route path="/addnews" element={<AddNews/>} />
 
