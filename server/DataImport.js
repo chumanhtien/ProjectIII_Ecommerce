@@ -17,6 +17,7 @@ import Category from "./Models/CategoryModel.js";
 import categories from "./data/categoriesData.js";
 import New from "./Models/NewModel.js";
 import newsData from "./data/NewsData.js";
+import Cart from "./Models/CartModel.js";
 const ImportData = express.Router();
 
 ImportData.post(
@@ -25,6 +26,16 @@ ImportData.post(
         await User.deleteMany({});
         // remove(): remove all document in collection in insert new 
         const importUser = await User.insertMany(users);
+        if (importUser) {
+            const listCarts = Promise.all(
+                importUser.map((user) => {
+                    Cart.create({
+                        userID: user._id,
+                        cartItems: []
+                    })
+                })
+            )
+        }
         res.send({importUser});
     })
 );

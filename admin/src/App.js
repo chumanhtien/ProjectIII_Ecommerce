@@ -32,14 +32,14 @@ function App() {
   const {userInfo} = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
+    if (userInfo && (userInfo.role === 1)) {
       // dispatch(getListCategories());
       dispatch(getAllOrders());
       dispatch(getAllProducts());
       dispatch(getALLNews());
       dispatch(listUser());
     }
-  }, [dispatch, userInfo])
+  }, [dispatch])
 
   return (
     <>

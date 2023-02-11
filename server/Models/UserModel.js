@@ -15,11 +15,17 @@ const userSchema = mongoose.Schema({
             type:String,
             required: true,
         },
-        isAdmin: {
-            type: Boolean,
+        role: {
+            // 1: admin, 2: nhan vien, 3: khach hang
+            type: Number, 
             required: true,
-            default: false
+            default: 3
         },
+        // isAdmin: {
+        //     type: Boolean,
+        //     required: true,
+        //     default: false
+        // },
         isBlocked: {
             type: Boolean,
             required: true,
@@ -31,12 +37,12 @@ const userSchema = mongoose.Schema({
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "Voucher"
                 },
-                number: {
-                    type: String
-                },
-                isUsed: {
-                    type: String
-                }
+                // number: {
+                //     type: String
+                // },
+                // isUsed: {
+                //     type: String
+                // }
             }
         ]
     },

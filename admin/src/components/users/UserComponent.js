@@ -179,7 +179,7 @@ const UserComponent = () => {
                           <h5 className="card-title mt-5">{user.name}</h5>
                           <div className="card-text text-muted">
                             {
-                              user.isAdmin ? (<p className="m-0">Admin</p>) : 
+                              (user.role === 1) ? (<p className="m-0">Admin</p>) : 
                               (<p className="m-0">Khách hàng</p>)
                             }
 
@@ -241,7 +241,7 @@ const UserComponent = () => {
                           <h5 className="card-title mt-5">{user.name}</h5>
                           <div className="card-text text-muted">
                             {
-                              user.isAdmin ? (<p className="m-0">Admin</p>) : 
+                              (user.role === 1) ? (<p className="m-0">Admin</p>) : 
                               (<p className="m-0">Khách hàng</p>)
                             }
 

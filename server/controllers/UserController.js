@@ -20,7 +20,8 @@ export const login = asyncHandler(async (req, res) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
-                isAdmin: user.isAdmin,
+                role: user.role,
+                // isAdmin: user.isAdmin,
                 isBlocked: user.isBlocked,
                 token: generateToken(user._id),
                 createdAt: user.createdAt,
@@ -52,6 +53,7 @@ export const register = asyncHandler(async (req, res) => {
         name, 
         email, 
         password,
+        role: 3
     });
 
     if (user) {
@@ -64,7 +66,8 @@ export const register = asyncHandler(async (req, res) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
-                isAdmin: user.isAdmin,
+                role: user.role,
+                // isAdmin: user.isAdmin,
                 token: generateToken(user._id),
                 cart: cart,
                 createdAt: user.createdAt 
@@ -85,7 +88,8 @@ export const getProfile = asyncHandler(async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
+            // isAdmin: user.isAdmin,
+            role: user.role,
             isBlocked: user.isBlocked,
             createdAt: user.createdAt,
         })
@@ -108,7 +112,8 @@ export const updateProfile = asyncHandler(async (req, res) => {
             _id: updatedUser._id,
             name: updatedUser.name,
             email: updatedUser.email,
-            isAdmin: updatedUser.isAdmin,
+            role: updatedUser.role,
+            // isAdmin: updatedUser.isAdmin,
             isBlocked: updatedUser.isBlocked,
             createdAt: updatedUser.createdAt,
             token: generateToken(updatedUser._id)
@@ -129,17 +134,26 @@ export const getAllUsersByAdmin = asyncHandler(async (req, res) => {
         },
     }
     : {};
-    const users = await User.find({isAdmin: false, ...keyword});
+    const users = await User.find({role: 3, ...keyword});
     res.json(users);
 })
 
 export const blockUser = asyncHandler(async (req, res) => {
     const user = await User.findById(req.params.id);
     if (user) {
-        user.isBlocked = true,
-        user.isBlockedAt = Date.now();
-        const userUpdated = user.save();
-        res.json(userUpdated);
+        if (user.role != 1) {
+            user.isBlocked = true;
+            user.isBlockedAt = Date.now();
+            const userUpdated = user.save();
+            res.json(userUpdated);
+        } else if (user.isBlocked) {
+            res.status(403);
+            throw new Error("Không thể block người đã bị block");
+        } else {
+            res.status(403);
+            throw new Error("Không thể thực hiện block đối với Admin");
+        }
+        
     } else {
         res.status(404);
         throw new Error("Không tìm thấy người dùng")
@@ -165,7 +179,8 @@ export const getUserProfileByAdmin = asyncHandler(async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
+            role: user.role,
+            // isAdmin: user.isAdmin,
             isBlocked: user.isBlocked,
             createdAt: user.createdAt,
         })
@@ -188,7 +203,8 @@ export const editUserByAdmin = asyncHandler(async (req, res) => {
             _id: updatedUser._id,
             name: updatedUser.name,
             email: updatedUser.email,
-            isAdmin: updatedUser.isAdmin,
+            role: updatedUser.role,
+            // isAdmin: updatedUser.isAdmin,
             isBlocked: updatedUser.isBlocked,
             createdAt: updatedUser.createdAt,
             token: generateToken(updatedUser._id)
@@ -223,7 +239,8 @@ export const addUserByAdmin = asyncHandler(async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
+            role: user.role,
+            // isAdmin: user.isAdmin,
             token: generateToken(user._id),
             cart: cart,
             createdAt: user.createdAt 

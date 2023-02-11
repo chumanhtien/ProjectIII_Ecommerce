@@ -28,7 +28,7 @@ export const getAllProducts = asyncHandler(async (req, res) => {
 
     const keyword = req.query.keyword ? {
         name: {
-            $regex: req.query.keyword,
+            $regex: req.query.keyword.trim(),
             $options: "i",
         },
     }
