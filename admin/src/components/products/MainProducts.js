@@ -15,6 +15,8 @@ import Pagination from "../Home/Pagination";
 import { PRODUCT_DELETE_RESET } from "../../Redux/Constants/ProductConstants";
 import Toast from "../LoadingError/Toast";
 import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 const sortByMap = ["vuathem", "datnhat", "renhat"];
 const NUMBER_PRODUCTS_PERPAGE = 6;
 const Toastobjects = {
@@ -152,7 +154,8 @@ const MainProducts = () => {
                     onChange={(e) => setKeyword(e.target.value)}
                   />
                   <button className="btn btn-light bg" type="button"  onClick={submitHandler}>
-                    <i className="far fa-search"></i>
+                    {/* <i className="far fa-search"></i> */}
+                    <FontAwesomeIcon className="icon" icon={solid('search')} />
                   </button>
                 </div>
                 

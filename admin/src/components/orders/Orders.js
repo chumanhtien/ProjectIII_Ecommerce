@@ -1,3 +1,5 @@
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React from "react";
 import CurrencyFormat from "react-currency-format";
@@ -64,7 +66,8 @@ const Orders = (props) => {
             </td>
             <td className="d-flex justify-content-end align-item-center">
               <Link to={`/order/${order._id}`} className="text-success">
-                <i className="fas fa-eye"></i>
+                {/* <i className="fas fa-eye"></i> */}
+                <FontAwesomeIcon icon={solid('eye')}/>
               </Link>
             </td>
           </tr>

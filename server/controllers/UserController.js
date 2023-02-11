@@ -267,9 +267,10 @@ export const deletedUserByAdmin = asyncHandler(async (req, res) => {
         }
         await user.remove();
         res.json({
-            message: `Xóa thành công Người dùng ${user.name}`,
+            message: `Xóa thành công Người dùng ${deletedUser.name}`,
             deletedUser});
     } else {
+        res.status(404);
         throw new Error("Không tìm thấy Người dùng");
     }
 })

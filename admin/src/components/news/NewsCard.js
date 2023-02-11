@@ -1,3 +1,5 @@
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React from "react";
 import { useDispatch } from "react-redux";
@@ -89,7 +91,8 @@ const NewsCard = (props) => {
                 onClick={() => deleteHandler(newsInfo._id)}
                 className="btn btn-sm btn-outline-danger p-2 pb-3 col-md-11"
               >
-                <i className="fas fa-trash-alt"></i>
+                {/* <i className="fas fa-trash-alt"></i> */}
+                <FontAwesomeIcon className="icon" icon={solid('trash')}/>
               </Link>
             </div>
           </div>

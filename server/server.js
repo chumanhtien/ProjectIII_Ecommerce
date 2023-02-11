@@ -2,19 +2,20 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDatabase from "./config/MongoDB.js";
 import userRouter from "./Routes/UserRoutes.js";
+import orderRouter from "./Routes/OrderRoutes.js";
+import cartRouter from "./Routes/CartRoutes.js";
+import productRoute from "./Routes/ProductRoutes.js";
+import voucherRouter from "./Routes/VoucherRoutes.js";
 
 import shoesProducts from "./data/Products/shoesProducts.js";
 import mobilesProducts from "./data/Products/mobilesProducts.js";
 import babymomProducts from "./data/Products/babymom.js";
-import ImportData from "./DataImport.js";
 import manclothesProducts from "./data/Products/manclothesProducts.js";
 import toysProducts from "./data/Products/toys.js"
-import productRoute from "./Routes/ProductRoutes.js";
 import {errorHandler, notFound} from "./Middleware/Errors.js"
-import orderRouter from "./Routes/OrderRoutes.js";
 import cors from "cors";
-import cartRouter from "./Routes/CartRoutes.js";
 import ClearData from "./ClearData.js";
+import ImportData from "./DataImport.js";
 
 dotenv.config();
 connectDatabase();
@@ -87,6 +88,9 @@ app.use("/api/orders", orderRouter);
 
 //API Cart
 app.use("/api/cart", cartRouter);
+
+//API Voucher
+app.use("/api/vouchers", voucherRouter);
 
 //PAYPAL SANDBOXS
 app.get("/api/config/paypal", (req, res) => {

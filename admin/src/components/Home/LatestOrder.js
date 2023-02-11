@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
 import { CurrencyFormatter } from "../converterComponents/CurrencyFormatter";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const LatestOrder = (props) => {
   const {loading, error, orders} = props;
@@ -37,7 +39,8 @@ const LatestOrder = (props) => {
                   <td>{moment(order.createdAt).calendar()}</td>
                   <td className="d-flex justify-content-end align-item-center">
                     <Link to={`/order/${order._id}`} className="text-success">
-                      <i className="fas fa-eye"></i>
+                      <FontAwesomeIcon icon={solid('eye')}/>
+                      {/* <i className="fas fa-eye"></i> */}
                     </Link>
                   </td>
                 </tr>
@@ -59,7 +62,8 @@ const LatestOrder = (props) => {
               <td>Today at 10:13 AM</td>
               <td className="d-flex justify-content-end align-item-center">
                 <Link to={`/order`} className="text-success">
-                  <i className="fas fa-eye"></i>
+                  // <i className="fas fa-eye"></i>
+                  <FontAwesomeIcon className="icon" icon={solid('eye')}/> 
                 </Link>
               </td>
             </tr> */}

@@ -10,6 +10,8 @@ import moment from "moment";
 import { toast } from "react-toastify";
 import { ORDER_MARK_CONFIRMED_RESET, ORDER_MARK_DELIVERED_RESET } from "../../Redux/Constants/OrderConstants";
 import Toast from "../LoadingError/Toast";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 const ToastObjects = {
   pauseOnFocusLoss: false,
   draggable: false,
@@ -67,7 +69,8 @@ const OrderDetailMain = (props) => {
                     <div className="row align-items-center ">
                       <div className="col-lg-6 col-md-6">
                         <span>
-                          <i className="far fa-calendar-alt mx-2"></i>
+                          {/* <i className="far fa-calendar-alt mx-2"></i> */}
+                          <FontAwesomeIcon className="mx-2" icon={solid('calendar-alt')}/>
                           <b className="text-white">
                             {moment(order.createdAt).format("llll")}
                           </b>
@@ -87,7 +90,8 @@ const OrderDetailMain = (props) => {
                         >
                         </input>
                         <Link className="btn btn-success ms-2" to="#">
-                          <i className="fas fa-print"></i>
+                          <FontAwesomeIcon icon={solid('print')}/>
+                          {/* <i className="fas fa-print"></i> */}
                         </Link>
                       </div> 
                     </div>

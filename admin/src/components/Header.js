@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import $ from "jquery";
 import { useDispatch } from "react-redux";
 import { logout } from "../Redux/Actions/UserActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -82,7 +84,8 @@ const Header = () => {
               placeholder="Search term"
             />
             <button className="btn btn-light bg" type="button">
-              <i className="far fa-search"></i>
+              {/* <i className="far fa-search"></i> */}
+              <FontAwesomeIcon className="icon" icon={solid('search')} />
             </button>
           </div>
           <datalist id="search_terms">
@@ -100,17 +103,20 @@ const Header = () => {
           className="btn btn-icon btn-mobile me-auto"
           data-trigger="#offcanvas_aside"
         >
-          <i className="md-28 fas fa-bars"></i>
+          {/* <i className="md-28 fas fa-bars"></i> */}
+          <FontAwesomeIcon icon={solid('bars')} />
         </button>
         <ul className="nav">
           <li className="nav-item">
             <Link className={`nav-link btn-icon `} title="Dark mode" to="#">
-              <i className="fas fa-moon"></i>
+              {/* <i className="fas fa-moon"></i> */}
+              <FontAwesomeIcon icon={solid('moon')} />
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link btn-icon" to="#">
-              <i className="fas fa-bell"></i>
+              {/* <i className="fas fa-bell"></i> */}
+              <FontAwesomeIcon icon={solid('bell')} />
             </Link>
           </li>
           <li className="nav-item">

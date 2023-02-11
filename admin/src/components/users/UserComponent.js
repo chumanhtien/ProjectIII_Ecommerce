@@ -8,6 +8,8 @@ import { toast } from "react-toastify";
 import Toast from "../LoadingError/Toast";
 import { USER_ADMIN_DELETE_USER_RESET, USER_BLOCKED_RESET, USER_UNBLOCKED_RESET } from "../../Redux/Constants/UserConstants";
 import Pagination from "../Home/Pagination";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 const ToastObjects = {
   pauseOnFocusLoss: false,
   draggable: false,
@@ -96,7 +98,8 @@ const UserComponent = () => {
         <h2 className="content-title">Customers</h2>
         <div>
           <Link to="/users/add" className="btn btn-primary">
-            <i className="material-icons md-plus"></i> Tạo mới người dùng
+            <FontAwesomeIcon className="icon" icon={solid('plus')} /> Tạo mới người dùng
+            {/* <i className="material-icons md-plus"></i> Tạo mới người dùng */}
           </Link>
         </div>
       </div>
@@ -114,7 +117,8 @@ const UserComponent = () => {
                     onChange={(e) => setKeyword(e.target.value)}
                   />
                   <button className="btn btn-light bg" type="button">
-                    <i className="far fa-search"></i>
+                    {/* <i className="far fa-search"></i> */}
+                    <FontAwesomeIcon className="icon" icon={solid('search')}/>
                   </button>
                 </div>
                 
@@ -197,7 +201,8 @@ const UserComponent = () => {
                               title="Sửa thông tin"
                               className="btn btn-sm btn-outline-warning p-2 pb-3 col-md-3"
                             >
-                              <i className="fas fa-pen"></i>
+                              Sua
+                              {/* <i className="fas fa-pen"></i> */}
                             </Link>
                           
                             <Link
@@ -205,7 +210,8 @@ const UserComponent = () => {
                               title="Xem thông tin"
                               className="btn btn-sm btn-outline-success p-2 pb-3 col-md-3"
                             >
-                              <i className="fas fa-eye"></i>
+                              <FontAwesomeIcon className="icon" icon={solid('eye')}/>
+                              {/* <i className="fas fa-eye"></i> */}
                             </Link>
                             <Link
                               to="#"
@@ -213,7 +219,8 @@ const UserComponent = () => {
                               onClick={() => deleteUserHandler(user._id)}
                               className="btn btn-sm btn-outline-danger p-2 pb-3 col-md-3"
                             >
-                              <i className="fas fa-trash-alt"></i>
+                              {/* <i className="fas fa-trash-alt"></i> */}
+                                <FontAwesomeIcon className="icon" icon={solid('trash')} />
                             </Link>
                           </div>
                           <div className="row d-flex flex-row justify-content-evenly">
@@ -258,7 +265,8 @@ const UserComponent = () => {
                               title="Sửa thông tin"
                               className="btn btn-sm btn-outline-warning p-2 pb-3 col-md-3"
                             >
-                              <i className="fas fa-pen"></i>
+                              <FontAwesomeIcon className="icon" icon={solid('pen')} />
+                              {/* <i className="fas fa-pen"></i> */}
                             </Link>
                           
                             <Link
@@ -266,15 +274,17 @@ const UserComponent = () => {
                               title="Xem thông tin"
                               className="btn btn-sm btn-outline-success p-2 pb-3 col-md-3"
                             >
-                              <i className="fas fa-eye"></i>
+                                {/* <i className="fas fa-eye"></i> */}
+                                <FontAwesomeIcon className="icon" icon={solid('eye')} />
                             </Link>
                             <Link
                               to="#"
                               onClick={() => deleteUserHandler(user._id)}
                               title="Xóa"
                               className="btn btn-sm btn-outline-danger p-2 pb-3 col-md-3"
-                            >
-                              <i className="fas fa-trash-alt"></i>
+                              >
+                              <FontAwesomeIcon className="icon" icon={solid('trash')} />
+                              {/* <i className="fas fa-trash-alt"></i> */}
                             </Link>
                           </div>
                           <div className="row d-flex flex-row justify-content-evenly">
@@ -314,13 +324,15 @@ const UserComponent = () => {
                           to="#"
                           className="btn btn-sm btn-outline-success p-2 pb-3 col-md-6"
                         >
-                          <i className="fas fa-pen"></i>
+                          <FontAwesomeIcon className="icon" icon={solid('pen')} />
+                          // <i className="fas fa-pen"></i>
                         </Link>
                         <Link
                           to="#"
                           className="btn btn-sm btn-outline-danger p-2 pb-3 col-md-6"
                         >
-                          <i className="fas fa-trash-alt"></i>
+                          <FontAwesomeIcon className="icon" icon={solid('trash')} />
+                          // <i className="fas fa-trash-alt"></i>
                         </Link>
                       </div>
                     </div>

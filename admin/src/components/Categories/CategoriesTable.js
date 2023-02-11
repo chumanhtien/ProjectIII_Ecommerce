@@ -1,3 +1,5 @@
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -77,7 +79,8 @@ const CategoriesTable = (props) => {
                         data-bs-toggle="dropdown"
                         className="btn btn-light"
                       >
-                        <i className="fas fa-ellipsis-h"></i>
+                      <FontAwesomeIcon className="icon" icon={solid('ellipsis')} />
+                        {/* <i className="fas fa-ellipsis-h"></i> */}
                       </Link>
                       <div className="dropdown-menu">
                         <Link className="dropdown-item text-warning" to={`/category/${categoryItem._id}/edit`}>

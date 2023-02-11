@@ -1,3 +1,5 @@
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import CurrencyFormat from 'react-currency-format';
 import { CurrencyFormatter } from "../converterComponents/CurrencyFormatter";
@@ -20,7 +22,7 @@ const TopTotal = (props) => {
         <div className="card card-body mb-4 shadow-sm">
           <article className="icontext">
             <span className="icon icon-sm rounded-circle alert-primary">
-              <i className="text-primary fas fa-usd-circle"></i>
+              <FontAwesomeIcon className="text-primary" icon={solid('sack-dollar')} />
             </span>
             <div className="text">
               <h6 className="mb-1">Doanh thu</h6> 
@@ -34,7 +36,7 @@ const TopTotal = (props) => {
         <div className="card card-body mb-4 shadow-sm">
           <article className="icontext">
             <span className="icon icon-sm rounded-circle alert-success">
-              <i className="text-success fas fa-bags-shopping"></i>
+              <FontAwesomeIcon className="text-success" icon={solid('basket-shopping')} />
             </span>
             <div className="text">
               <h6 className="mb-1">Tổng đơn hàng</h6>
@@ -47,7 +49,7 @@ const TopTotal = (props) => {
         <div className="card card-body mb-4 shadow-sm">
           <article className="icontext">
             <span className="icon icon-sm rounded-circle alert-warning">
-              <i className="text-warning fas fa-shopping-basket"></i>
+              <FontAwesomeIcon className="text-warning" icon={solid('gifts')} />
             </span>
             <div className="text">
               <h6 className="mb-1">Tổng số sản phẩm</h6>
@@ -60,7 +62,7 @@ const TopTotal = (props) => {
         <div className="card card-body mb-4 shadow-sm">
           <article className="icontext">
             <span className="icon icon-sm rounded-circle alert-danger">
-              <i className="text-danger fas fa-user"></i>
+              <FontAwesomeIcon className="text-danger" icon={solid('user')} />
             </span>
             <div className="text">
               <h6 className="mb-1">Tổng số Người dùng</h6>
@@ -73,7 +75,7 @@ const TopTotal = (props) => {
         <div className="card card-body mb-4 shadow-sm">
           <article className="icontext">
             <span className="icon icon-sm rounded-circle alert-info">
-              <i className="text-info fas fa-newspaper"></i>
+              <FontAwesomeIcon className="text-info" icon={solid('newspaper')} />
             </span>
             <div className="text">
               <h6 className="mb-1">Tổng số Tin tức</h6>
