@@ -1068,7 +1068,8 @@ ul.row-sm {
   background-color: #fff;
   border-color: rgba(108, 117, 125, 0.25);
 }
-.btn-light i {
+.btn-light i,
+.btn-light .icon {
   color: #adb5bd;
 }
 .btn-light:hover {
@@ -1082,10 +1083,10 @@ ul.row-sm {
   cursor: ns-resize !important;
 }
 
-.btn-sm i {
+.btn-sm i, .btn-sm .icon {
   font-size: 1.2rem;
   line-height: 0.7;
-  vertical-align: bottom;
+  vertical-align: -webkit-baseline-middle;
 }
 
 /* NEWS */

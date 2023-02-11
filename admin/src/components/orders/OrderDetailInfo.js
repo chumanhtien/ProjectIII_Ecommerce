@@ -1,3 +1,5 @@
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 const OrderDetailInfo = (props) => {
@@ -8,7 +10,8 @@ const OrderDetailInfo = (props) => {
       <div className="col-md-6 col-lg-4">
         <article className="icontext align-items-start">
           <span className="icon icon-sm rounded-circle alert-success">
-            <i className="text-success fas fa-user"></i>
+            {/* <i className="text-success fas fa-user"></i> */}
+            <FontAwesomeIcon className="text-success" icon={solid('user')}/>
           </span>
           <div className="text">
             <h6 className="mb-1">Khách hàng</h6>
@@ -22,7 +25,8 @@ const OrderDetailInfo = (props) => {
       <div className="col-md-6 col-lg-4">
         <article className="icontext align-items-start">
           <span className="icon icon-sm rounded-circle alert-success">
-            <i className="text-success fas fa-truck-moving"></i>
+            {/* <i className="text-success fas fa-truck-moving"></i> */}
+            <FontAwesomeIcon className="text-success" icon={solid('truck-moving')}/>
           </span>
           <div className="text">
             <h6 className="mb-1">Thông tin đơn hàng</h6>
@@ -36,7 +40,8 @@ const OrderDetailInfo = (props) => {
       <div className="col-md-6 col-lg-4">
         <article className="icontext align-items-start">
           <span className="icon icon-sm rounded-circle alert-success">
-            <i className="text-success fas fa-map-marker-alt"></i>
+            {/* <i className="text-success fas fa-map-marker-alt"></i> */}
+            <FontAwesomeIcon className="text-success" icon={solid('map-marker-alt')}/>          
           </span>
           <div className="text">
             <h6 className="mb-1">Giao hàng tới</h6>

@@ -1,3 +1,5 @@
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import CurrencyFormat from "react-currency-format";
 import { useDispatch } from "react-redux";
@@ -35,14 +37,14 @@ const Product = (props) => {
                 to={`/products/${product.category}/${product._id}/edit`}
                 className="btn btn-sm btn-outline-success p-2 pb-3 col-md-5"
               >
-                <i className="fas fa-pen"></i>
+                <FontAwesomeIcon className="icon" icon={solid('pen')} />
               </Link>
               <Link
                 to="#"
                 onClick={() => deleteHandler(product.category, product._id)}
                 className="btn btn-sm btn-outline-danger p-2 pb-3 col-md-5"
               >
-                <i className="fas fa-trash-alt"></i>
+                <FontAwesomeIcon className="icon" icon={solid('trash')} />
               </Link>
             </div>
           </div>

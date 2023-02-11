@@ -11,7 +11,7 @@ import Category from "../Models/CategoryModel.js";
 import New from "../Models/NewModel.js";
 import * as ProductController from "../controllers/ProductController.js";
 
-const productRoute = express.Router();
+const productRouter = express.Router();
 
 //
 const shuffleArray = (array) => { 
@@ -27,13 +27,13 @@ const shuffleArray = (array) => {
 const PAGE_SIZE = 3;
 
 //GET ALL
-productRoute.get(
+productRouter.get(
     "/",
     ProductController.getAllProducts
 )
 
 //GET ALL CATEGORIES
-productRoute.get(
+productRouter.get(
     "/categories",
     asyncHandler(async (req, res) => {
         const categories = await Category.find({});
@@ -42,67 +42,67 @@ productRoute.get(
 )
 
 //GET ALL SHOES PRODUCTS
-productRoute.get(
+productRouter.get(
     "/shoes",
     ProductController.getAllShoeProducts
 );
 
 //GET SINGLE SHOE PRODUCTS
-productRoute.get(
+productRouter.get(
     "/shoes/:id",
     ProductController.getShoeById
 );
 
 //GET ALL MOBILES PRODUCTS
-productRoute.get(
+productRouter.get(
     "/mobiles",
     ProductController.getAllMobileProducts
 );
 
 //GET SINGLE MOBILE PRODUCTS
-productRoute.get(
+productRouter.get(
     "/mobiles/:id",
     ProductController.getMobileById
 );
 
 //GET ALL MANCLOTHES PRODUCTS
-productRoute.get(
+productRouter.get(
     "/manclothes",
     ProductController.getAllManclothesProducts
 );
 
 //GET SINGLE MANCLOTHES PRODUCTS
-productRoute.get(
+productRouter.get(
     "/manclothes/:id",
     ProductController.getManclothesById
 );
 
 //GET ALL TOYS PRODUCTS
-productRoute.get(
+productRouter.get(
     "/toys",
     ProductController.getAllToyProducts
 );
 
 //GET SINGLE TOY PRODUCTS
-productRoute.get(
+productRouter.get(
     "/toys/:id",
     ProductController.getToyById
 );
 
 //GET ALL BABYMOM PRODUCTS
-productRoute.get(
+productRouter.get(
     "/babymom",
     ProductController.getAllBabymomProducts
 );
 
 //GET SINGLE BABYMOM PRODUCTS
-productRoute.get(
+productRouter.get(
     "/babymom/:id",
     ProductController.getBabymomById
 );
 
 //PRODUCT REVIEW
-productRoute.post(
+productRouter.post(
   `/:id/review`,
 //   `/:category/:id/review`,
   protect,
@@ -110,7 +110,7 @@ productRoute.post(
 )
 
 //ADMIN GET ALL PRODUCT WITHOUT SEARCH AND PAGINATION
-productRoute.get(
+productRouter.get(
     "/admin/all", 
     protect, 
     admin, 
@@ -119,7 +119,7 @@ productRoute.get(
 
 
 //DELETE PRODUCT BY ID
-productRoute.delete(
+productRouter.delete(
     "/delete/:category/:id",
     protect,
     admin,
@@ -127,7 +127,7 @@ productRoute.delete(
 );
 
 //CREATE SHOES PRODUCT
-productRoute.post(
+productRouter.post(
     "/shoes/create",
     protect,
     admin,
@@ -135,7 +135,7 @@ productRoute.post(
 );
 
 //CREATE MOBILES PRODUCT
-productRoute.post(
+productRouter.post(
     "/mobiles/create",
     protect,
     admin,
@@ -143,7 +143,7 @@ productRoute.post(
 );
 
 //CREATE MANCLOTHES PRODUCT
-productRoute.post(
+productRouter.post(
     "/manclothes/create",
     protect,
     admin,
@@ -151,7 +151,7 @@ productRoute.post(
 );
 
 //CREATE TOYS PRODUCT
-productRoute.post(
+productRouter.post(
     "/toys/create",
     protect,
     admin,
@@ -159,7 +159,7 @@ productRoute.post(
 );
 
 //CREATE BABYMOM PRODUCT
-productRoute.post(
+productRouter.post(
     "/babymom/create",
     protect,
     admin,
@@ -167,7 +167,7 @@ productRoute.post(
 );
 
 //EDIT SHOES PRODUCT
-productRoute.put(
+productRouter.put(
     "/shoes/edit/:id",
     protect,
     admin,
@@ -175,7 +175,7 @@ productRoute.put(
 );
 
 //EDIT MOBILES PRODUCT
-productRoute.put(
+productRouter.put(
     "/mobiles/edit/:id",
     protect,
     admin,
@@ -183,7 +183,7 @@ productRoute.put(
 );
 
 //EDIT MANCLOTHES PRODUCT
-productRoute.put(
+productRouter.put(
     "/manclothes/edit/:id",
     protect,
     admin,
@@ -191,7 +191,7 @@ productRoute.put(
 );
 
 //EDIT TOYS PRODUCT
-productRoute.put(
+productRouter.put(
     "/toys/edit/:id",
     protect,
     admin,
@@ -199,7 +199,7 @@ productRoute.put(
 );
 
 //EDIT BABYMOM PRODUCT
-productRoute.put(
+productRouter.put(
     "/babymom/edit/:id",
     protect,
     admin,
@@ -207,7 +207,7 @@ productRoute.put(
 );
 
 //GET CATEGORY BY ID
-productRoute.get(
+productRouter.get(
     "/category/:id/",
     protect,
     admin,
@@ -223,7 +223,7 @@ productRoute.get(
 );
 
 // UPDATE CATEGORY BY ID
-productRoute.put(
+productRouter.put(
     "/category/:id/edit",
     protect,
     admin,
@@ -243,7 +243,7 @@ productRoute.put(
 );
 
 // ADD CATEGORY 
-productRoute.post(
+productRouter.post(
     "/category/add",
     protect,
     admin,
@@ -283,7 +283,7 @@ productRoute.post(
 )
 
 //ADMIN DELETE CATEGORY 
-productRoute.delete(
+productRouter.delete(
     "/category/:id/delete",
     protect,
     admin,
@@ -303,7 +303,7 @@ productRoute.delete(
 );
 
 //GET ALL NEWS
-productRoute.get(
+productRouter.get(
     "/news",
     asyncHandler(async (req, res) => {
         const keyword = req.query.keyword ? {
@@ -321,7 +321,7 @@ productRoute.get(
 );
 
 //GET SINGLE NEWS
-productRoute.get(
+productRouter.get(
     "/news/:id",
     asyncHandler(async (req, res) => {
         const singleNew = await New.findById(req.params.id);
@@ -342,7 +342,7 @@ productRoute.get(
 );
 
 //ADMIN GET ALL NEWS
-productRoute.get(
+productRouter.get(
     "/admin/news", 
     protect, 
     admin, 
@@ -360,7 +360,7 @@ productRoute.get(
 );
 
 //CREATE NEWS PRODUCT
-productRoute.post(
+productRouter.post(
     "/news/add",
     protect,
     admin,
@@ -395,7 +395,7 @@ productRoute.post(
 );
 
 //ADMIN DELETE A NEWS
-productRoute.delete(
+productRouter.delete(
     "/news/:id/delete",
     protect,
     admin,
@@ -414,4 +414,4 @@ productRoute.delete(
     })
 );
 
-export default productRoute;
+export default productRouter;
