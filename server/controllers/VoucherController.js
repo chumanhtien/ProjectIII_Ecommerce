@@ -47,14 +47,16 @@ export const getVoucherById = asyncHandler(async (req, res) => {
 })
 
 export const createVoucher = asyncHandler(async (req, res) => {
-  const { name, type, description, discount, expireAt } = req.body;
+  const { name, type, description, discount, maxValue, isActive, expireAt } = req.body;
   const expireAtDate = new Date(expireAt);
   const newVoucher = await Voucher.create({
     name,
     type,
     description,
     discount,
-    expireAt: Date.now().valueOf() + 0*1000*60*60*24
+    maxValue,
+    isActive,
+    expireAt: Date.now()
   });
   if (newVoucher) {
     res.status(201).json({
@@ -63,6 +65,8 @@ export const createVoucher = asyncHandler(async (req, res) => {
       type: newVoucher.type,
       description: newVoucher.description,
       discount: newVoucher.discount,
+      maxValue: newVoucher.maxValue,
+      isActive: newVoucher.isActive,
       expireAt: new Date(newVoucher.expireAt)
     });
   } else {

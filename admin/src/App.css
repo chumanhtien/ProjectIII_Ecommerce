@@ -1150,3 +1150,78 @@ form .input-group {
 .new-author {
   font-size: 20px
 }
+
+/* Voucher */
+.voucher-card {
+  height: 200px;
+}
+.voucher-card .h-80 {
+  height: 80%;
+}
+
+.voucher-card .text-info {
+  position: relative;
+}
+
+.voucher-card .action {
+  background: aliceblue;
+}
+.voucher-left-header {
+  font-size: 16 px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.voucher-left-header.ship {
+  background-color: #0ba172;
+}
+
+.voucher-left-header.discount {
+  background-color: #de6418;
+}
+.voucher-id {
+  font-weight: 600;
+  font-size: 18px;
+}
+.voucher-name {
+  font-weight: 600;
+  color: #000;
+  font-size: 18px;
+  line-height: 1.2;
+  min-height: 40px;
+
+}
+.voucher-description {
+  color: #000;
+  font-size: 14px;
+  padding-left: 5px;
+}
+.voucher-expire {
+  color: #7a7a7a;
+  line-height: 1.1;
+  font-size: small;
+  position: absolute;
+  bottom: 5px;
+  font-style: italic;
+  padding-left: 5px;
+}
+
+.form-label i {
+  color: #ad1414;
+  font-size: smaller;
+}
+.card-body .voucher-sub-title {
+  font-size: 25px;
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 10px;
+}
+.voucher-input-active input{
+  display: none;
+}
+.card-body .voucher-active-text {
+  color: rgb(12, 170, 73);
+}
+.card-body .voucher-unactive-text {
+  color: rgb(203, 26, 10);
+}

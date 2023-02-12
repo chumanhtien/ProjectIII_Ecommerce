@@ -105,7 +105,7 @@ const UserComponent = () => {
       </div>
 
       <div className="card mb-4">
-      <header className="card-header bg-white ">
+        <header className="card-header bg-white ">
           <div className="row gx-3 py-3">
             <div className="col-search col-lg-4 col-md-6 me-auto">
               <form className="searchform" onSubmit={submitHandler}>

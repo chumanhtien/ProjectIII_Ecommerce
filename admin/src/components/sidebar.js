@@ -107,14 +107,25 @@ const Sidebar = () => {
               <NavLink
                 activeClassName="active"
                 className="menu-link"
-                to="/category"
+                to="/vouchers"
+              >
+                <FontAwesomeIcon className="icon" icon={solid('ticket')} />
+                {/* <i className="icon fas fa-list"></i> */}
+                <span className="text">Mã giảm giá</span>
+              </NavLink>
+            </li>
+            <li className="menu-item">
+              <NavLink
+                activeClassName="active"
+                className="menu-link"
+                to="/categories"
               >
                 <FontAwesomeIcon className="icon" icon={solid('list')} />
                 {/* <i className="icon fas fa-list"></i> */}
                 <span className="text">Categories</span>
               </NavLink>
             </li>
-
+            
 
             <li className="menu-item">
               <NavLink

@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar from "./../components/sidebar";
-import Header from "./../components/Header";
-import AddNewsMain from "../components/news/AddNewsMain";
+import Sidebar from "../../components/sidebar";
+import Header from "../../components/Header";
+import AddNewsMain from "../../components/news/AddNewsMain";
 
 const AddNews = () => {
   return (

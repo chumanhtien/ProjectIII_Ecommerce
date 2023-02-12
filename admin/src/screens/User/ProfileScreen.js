@@ -2,13 +2,13 @@ import moment from "moment";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import Header from "../components/Header";
-import Message from "../components/LoadingError/Error";
-import Loading from "../components/LoadingError/Loading";
-import Orders from "../components/orders/Orders";
-import Sidebar from "../components/sidebar";
-import { getAllUserOrdersByAdmin } from "../Redux/Actions/OrderActions";
-import { getUserInfo } from "../Redux/Actions/UserActions";
+import Header from "../../components/Header";
+import Message from "../../components/LoadingError/Error";
+import Loading from "../../components/LoadingError/Loading";
+import Orders from "../../components/orders/Orders";
+import Sidebar from "../../components/sidebar";
+import { getAllUserOrdersByAdmin } from "../../Redux/Actions/OrderActions";
+import { getUserInfo } from "../../Redux/Actions/UserActions";
 
 const ProfileScreen = () => {
     const {id} = useParams();

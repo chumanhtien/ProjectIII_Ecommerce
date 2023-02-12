@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar from "../components/sidebar";
-import Header from "../components/Header";
-import MainNews from "../components/news/MainNews.js";
+import Sidebar from "../../components/sidebar";
+import Header from "../../components/Header";
+import MainNews from "../../components/news/MainNews.js";
 
 const NewsScreen = () => {
   return (

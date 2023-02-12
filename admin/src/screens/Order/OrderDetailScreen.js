@@ -1,7 +1,7 @@
 import React from "react";
-import Sidebar from "./../components/sidebar";
-import Header from "./../components/Header";
-import OrderDetailMain from "../components/orders/OrderDetailMain";
+import Sidebar from "../../components/sidebar";
+import Header from "../../components/Header";
+import OrderDetailMain from "../../components/orders/OrderDetailMain";
 import { useParams } from "react-router-dom";
 
 const OrderDetailScreen = () => {

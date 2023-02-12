@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import Header from "../components/Header";
-import Message from "../components/LoadingError/Error";
-import Loading from "../components/LoadingError/Loading";
-import Sidebar from "../components/sidebar";
-import Toast from "../components/LoadingError/Toast"
-import { addAnUser } from "../Redux/Actions/UserActions";
-import { USER_ADMIN_ADD_USER_RESET } from "../Redux/Constants/UserConstants";
+import Header from "../../components/Header";
+import Message from "../../components/LoadingError/Error";
+import Loading from "../../components/LoadingError/Loading";
+import Sidebar from "../../components/sidebar";
+import Toast from "../../components/LoadingError/Toast"
+import { addAnUser } from "../../Redux/Actions/UserActions";
+import { USER_ADMIN_ADD_USER_RESET } from "../../Redux/Constants/UserConstants";
 
 
 const Toastobjects = {

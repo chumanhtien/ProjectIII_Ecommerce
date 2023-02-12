@@ -192,14 +192,14 @@ const EditProductMain = (props) => {
     <>
     <Toast/>
       <section className="content-main" style={{ maxWidth: "1200px" }}>
-        <form onSubmit={submitHandler}>
+        <div>
           <div className="content-header">
             <Link to="/products" className="btn btn-danger text-white">
               Trở lại trang Sản phẩm
             </Link>
             <h2 className="content-title">Cập nhật sản phẩm</h2>
             <div>
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="btn btn-primary" onClick={submitHandler}>
                 Cập nhật
               </button>
             </div>
@@ -801,7 +801,7 @@ const EditProductMain = (props) => {
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </section>
     </>
   );

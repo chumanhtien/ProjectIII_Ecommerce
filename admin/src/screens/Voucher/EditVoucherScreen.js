@@ -1,10 +1,11 @@
 import React from "react";
-import Sidebar from "./../components/sidebar";
-import Header from "./../components/Header";
-import EditProductMain from "./../components/products/EditproductMain";
+import Sidebar from "../../components/sidebar";
+import Header from "../../components/Header";
+import EditProductMain from "../../components/products/EditproductMain";
 import { useParams } from "react-router-dom";
+import VoucherEditMain from "../../components/vouchers/VoucherEditMain";
 
-const ProductEditScreen = () => {
+const EditVoucherScreen = () => {
   // const productId = products.find((p) => p._id === match.params.id);
   const {id, category} = useParams();
   console.log("id: ", id);
@@ -15,9 +16,9 @@ const ProductEditScreen = () => {
       <Sidebar />
       <main className="main-wrap">
         <Header />
-        <EditProductMain id={id} category={category}/>
+        <VoucherEditMain id={id} />
       </main>
     </>
   );
 };
-export default ProductEditScreen;
+export default EditVoucherScreen;

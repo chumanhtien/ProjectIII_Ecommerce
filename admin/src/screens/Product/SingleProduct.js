@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
-import Header from "../Header";
+import Header from "../../components/Header";
 import { Link, useParams } from "react-router-dom";
-import Rating from "./Rating";
-import Message from '../LoadingError/Error';
+import Rating from "../../components/products/Rating";
+import Message from '../../components/LoadingError/Error';
 // import dtddProducts from "../data/dtddProducts";
 // import shoesProducts from "../../data/Products/shoesProducts"
-import Sidebar from "../sidebar";
-import Loading from "../LoadingError/Loading";
+import Sidebar from "../../components/sidebar";
+import Loading from "../../components/LoadingError/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleDetails } from "../../Redux/Actions/ProductActions";
 import moment from "moment";
 import CurrencyFormat from "react-currency-format";
-import { CurrencyFormatter } from "../converterComponents/CurrencyFormatter";
+import { CurrencyFormatter } from "../../components/converterComponents/CurrencyFormatter";
 
 
 const SingleProduct = () => {

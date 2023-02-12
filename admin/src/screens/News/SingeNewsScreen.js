@@ -2,11 +2,11 @@ import moment from "moment";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import Header from "../components/Header";
-import Message from "../components/LoadingError/Error";
-import Loading from "../components/LoadingError/Loading";
-import Sidebar from "../components/sidebar";
-import { getSingleNewsDetails } from "../Redux/Actions/ProductActions";
+import Header from "../../components/Header";
+import Message from "../../components/LoadingError/Error";
+import Loading from "../../components/LoadingError/Loading";
+import Sidebar from "../../components/sidebar";
+import { getSingleNewsDetails } from "../../Redux/Actions/ProductActions";
 
 const SingeNewsScreen = () => {
     const {id} = useParams();

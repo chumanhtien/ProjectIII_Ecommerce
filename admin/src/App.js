@@ -4,28 +4,30 @@ import "./responsive.css";
 import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
-import ProductScreen from "./screens/ProductScreen";
-import CategoriesScreen from "./screens/CategoriesScreen";
-import OrderScreen from "./screens/OrderScreen";
-import OrderDetailScreen from "./screens/OrderDetailScreen";
-import AddProduct from "./screens/AddProduct";
+import ProductScreen from "./screens/Product/ProductScreen";
+import CategoriesScreen from "./screens/Category/CategoriesScreen";
+import OrderScreen from "./screens/Order/OrderScreen";
+import OrderDetailScreen from "./screens/Order/OrderDetailScreen";
+import AddProduct from "./screens/Product/AddProduct";
 import Login from "./screens/LoginScreen";
-import UsersScreen from "./screens/UsersScreen";
-import ProductEditScreen from "./screens/ProductEditScreen";
+import UsersScreen from "./screens/User/UsersScreen";
+import ProductEditScreen from "./screens/Product/ProductEditScreen";
 import NotFound from "./screens/NotFound";
 import PrivateRouter  from "./PrivateRouter";
 import { useDispatch, useSelector } from "react-redux";
 import { getALLNews, getAllProducts } from "./Redux/Actions/ProductActions";
-import SingleProduct from "./components/products/SingleProduct";
+import SingleProduct from "./screens/Product/SingleProduct";
 import { getAllOrders } from "./Redux/Actions/OrderActions";
-import ProfileScreen from "./screens/ProfileScreen";
-import EditProfileScreen from "./screens/EditProfileScreen";
-import AddUser from "./screens/AddUser";
+import ProfileScreen from "./screens/User/ProfileScreen";
+import EditProfileScreen from "./screens/User/EditProfileScreen";
+import AddUser from "./screens/User/AddUser";
 import AdminProfileScreen from "./screens/AdminProfileScreen";
-import NewsScreen from "./screens/NewsScreen";
-import AddNews from "./screens/AddNews";
-import SingeNewsScreen from "./screens/SingeNewsScreen";
+import NewsScreen from "./screens/News/NewsScreen";
+import AddNews from "./screens/News/AddNews";
+import SingeNewsScreen from "./screens/News/SingeNewsScreen";
 import { listUser } from "./Redux/Actions/UserActions";
+import VoucherScreen from "./screens/Voucher/VoucherScreen";
+import EditVoucherScreen from "./screens/Voucher/EditVoucherScreen";
 function App() {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin)
@@ -72,8 +74,8 @@ function App() {
 
 
 
-            <Route path="/category" element={<CategoriesScreen/>} />
-            <Route path="/category/:id/edit" element={<CategoriesScreen/>} />
+            <Route path="/categories" element={<CategoriesScreen/>} />
+            <Route path="/categories/:id/edit" element={<CategoriesScreen/>} />
 
             <Route path="/orders" element={<OrderScreen/>} />
             <Route path="/orders/page/:pageNumber" element={<OrderScreen/>} />
@@ -101,7 +103,11 @@ function App() {
             <Route path="/users/:id/profile" element={<ProfileScreen/>} />
             <Route path="/users/:id/editprofile" element={<EditProfileScreen/>} />
 
-
+            <Route path="/vouchers" element={<VoucherScreen />}></Route>
+            <Route path="/vouchers/:id/edit" element={<EditVoucherScreen />}></Route>
+            <Route path="/vouchers/page/:pageNumber" element={<VoucherScreen/>} />
+            <Route path="/vouchers/:filter/page/:pageNumber" element={<VoucherScreen/>} />
+            <Route path="/vouchers/:filter" element={<VoucherScreen/>} />
             {/* <Route path="/products/shoes/:id/edit" element={<ProductEditScreen/>} /> */}
             <Route path="/products/:category/:id/edit" element={<ProductEditScreen/>} />
             <Route path="/products/:category/:id" element={<SingleProduct/>}></Route>
