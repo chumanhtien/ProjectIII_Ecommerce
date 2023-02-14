@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import Pagination from "../Home/Pagination";
 import Voucher from "./Voucher";
 
-const sortByMap = ["vuathem", "datnhat", "renhat"];
 
 const listVouchers = [
   {
@@ -87,7 +86,7 @@ const MainVouchers = () => {
       <div className="content-header">
         <h2 className="content-title">Mã giảm giá</h2>
         <div>
-          <Link to={"#"} className="btn btn-primary">
+          <Link to={"/vouchers/add"} className="btn btn-primary">
             Thêm mới
           </Link>
         </div>
@@ -113,18 +112,25 @@ const MainVouchers = () => {
             </div>
             <div className="col-lg-2 col-6 col-md-3">
               <select className="form-select" onChange={(e) => setSortBy(e.target.value)}>
-                <option value={""}>Type</option>
-                <option value={""}>Ship</option>
-                <option value={""}>Sản phẩm (%)</option>
-                <option value={""}>Sản phẩm (đ)</option>
+                <option value={0}>Type</option>
+                <option value={1}>Ship</option>
+                <option value={2}>Sản phẩm (%)</option>
+                <option value={3}>Sản phẩm (vnđ)</option>
+              </select>
+            </div>
+            <div className="col-lg-2 col-6 col-md-3">
+              <select className="form-select" onChange={(e) => setSortBy(e.target.value)}>
+                <option value={0}>Trạng thái</option>
+                <option value={1}>Kích hoạt</option>
+                <option value={2}>Chưa kích hoạt</option>
               </select>
             </div>
             <div className="col-lg-2 col-6 col-md-3">
               <select className="form-select" onChange={(e) => setSortBy(e.target.value)}>
                 <option value={""}>Sắp xếp</option>
-                {sortByMap.map((sortByItem, index) => (
-                  <option key={index}>{sortByItem === "vuathem" ? "Vừa thêm" : sortByItem === "datnhat" ? "Đắt nhất" : "Rẻ nhất"}</option>
-                ))}
+                <option value={""}>Mới nhất</option>
+                <option value={""}>Cũ nhất</option>
+                <option value={""}>Giá trị nhất</option>
               </select>
             </div>
           </div>

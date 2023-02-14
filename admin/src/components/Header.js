@@ -92,9 +92,14 @@ const Header = () => {
             <option value="Thống kê" />
             <option value="Sản phẩm" />
             <option value="Thêm sản phẩm" />
-            <option value="Categories" />
             <option value="Đơn đặt hàng" />
-            <option value="Người dùng" />
+            <option value="Khách hàng" />
+            <option value="Tin tức" />
+            <option value="Nhân viên" />
+            <option value="Mã giảm giá" />
+            <option value="Categories" />
+            
+            <option value="Transaction" />
           </datalist>
         </form>
       </div>

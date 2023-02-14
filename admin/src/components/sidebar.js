@@ -80,7 +80,7 @@ const Sidebar = () => {
                 to="/users"
               >
                 <FontAwesomeIcon className="icon" icon={solid('user')} />
-                <span className="text">Người dùng</span>
+                <span className="text">Khách hàng</span>
               </NavLink>
             </li>
             <li className="menu-item">

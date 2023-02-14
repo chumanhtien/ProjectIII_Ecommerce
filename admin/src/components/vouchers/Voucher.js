@@ -41,10 +41,10 @@ const Voucher = (props) => {
                     
                   <div className="p-1 h-100 col-7">
                     <div className="p-1 h-80 text-info">
-                      <div className="voucher-id">Mã: {voucher._id}</div>
-                      <div className="voucher-name">{voucher.name}</div>
-                      <div className="voucher-description">{voucher.description}</div>
-                      <div className="voucher-expire">{`Hạn đến: ${moment(new Date(voucher.expireAt)).format("h:m:s")} ngày ${moment(new Date(voucher.expireAt)).format("D/M/Y")}`}</div></div>
+                      <div className="voucher-id">Mã: {voucher.id ? voucher.id : 'ID mã giảm giá'}</div>
+                      <div className="voucher-name">{voucher.name ? voucher.name : "Tên"}</div>
+                      <div className="voucher-description">{voucher.description ? voucher.description : "Mô tả"}</div>
+                      <div className="voucher-expire">Hạn đến: {voucher?.expireAt ? `${moment(new Date(voucher.expireAt)).format("h:m:s")} ngày ${moment(new Date(voucher.expireAt)).format("D/M/Y")}` : ''}</div></div>
                     <div className="d-flex flex-column h-20">
                       <div className="d-flex flex-row justify-content-evenly">
                         {!voucher.isActive ?
@@ -142,7 +142,7 @@ const Voucher = (props) => {
           </>
         )
         }
-        </div>
+      </div>
     </>
   )
 }

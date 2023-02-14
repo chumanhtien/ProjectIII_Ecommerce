@@ -28,6 +28,7 @@ import SingeNewsScreen from "./screens/News/SingeNewsScreen";
 import { listUser } from "./Redux/Actions/UserActions";
 import VoucherScreen from "./screens/Voucher/VoucherScreen";
 import EditVoucherScreen from "./screens/Voucher/EditVoucherScreen";
+import CreateVoucherScreen from "./screens/Voucher/CreateVoucherScreen";
 function App() {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin)
@@ -104,10 +105,11 @@ function App() {
             <Route path="/users/:id/editprofile" element={<EditProfileScreen/>} />
 
             <Route path="/vouchers" element={<VoucherScreen />}></Route>
+            <Route path="/vouchers/add" element={<CreateVoucherScreen />}></Route>
             <Route path="/vouchers/:id/edit" element={<EditVoucherScreen />}></Route>
             <Route path="/vouchers/page/:pageNumber" element={<VoucherScreen/>} />
             <Route path="/vouchers/:filter/page/:pageNumber" element={<VoucherScreen/>} />
-            <Route path="/vouchers/:filter" element={<VoucherScreen/>} />
+            <Route path="/vouchers/:filter" element={<VoucherScreen />} />
             {/* <Route path="/products/shoes/:id/edit" element={<ProductEditScreen/>} /> */}
             <Route path="/products/:category/:id/edit" element={<ProductEditScreen/>} />
             <Route path="/products/:category/:id" element={<SingleProduct/>}></Route>
