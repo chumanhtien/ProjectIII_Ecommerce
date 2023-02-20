@@ -80,7 +80,7 @@ export const deleteOrderById = asyncHandler(async (req, res) => {
             let product = {};
             let updatedProduct = {};
             for (let i = 0; i < order.orderItems.length; i++) {
-                product = await ((await Mobile.findById(order.orderItems[i].productId)) || (await Shoes.findById(order.orderItems[i].productId))
+                product = await ((await Mobile.findById(order.orderItems[i].productId)) || (await Shoe.findById(order.orderItems[i].productId))
                         || (await ManClothes.findById(order.orderItems[i].productId)) || (await BabyMom.findById(order.orderItems[i].productId))
                         || (await Toy.findById(order.orderItems[i].productId)));
                 if (product) {

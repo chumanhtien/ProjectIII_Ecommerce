@@ -9,9 +9,9 @@ const users = [
         // isAdmin: true,
     },
     {
-        name: "User",
-        email: "user@example.com",
-        role: 3,
+        name: "SalesPerson",
+        email: "salesperson@example.com",
+        role: 2,
         password: bcrypt.hashSync("123456", 10),
         
     },

@@ -9,7 +9,7 @@ const cartSchema = mongoose.Schema({
   },
   cartItems: [
     {
-      productID: {
+      productId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "Shoe Mobile BabyMom Toy Manclothes"

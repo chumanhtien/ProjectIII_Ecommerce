@@ -24,15 +24,18 @@ ImportData.post(
     "/users", 
     asyncHandler(async (req, res) => {
         await User.deleteMany({});
+        await Cart.deleteMany({});
         // remove(): remove all document in collection in insert new 
         const importUser = await User.insertMany(users);
         if (importUser) {
             const listCarts = Promise.all(
                 importUser.map((user) => {
-                    Cart.create({
-                        userID: user._id,
-                        cartItems: []
-                    })
+                    if (user.role === 3) {
+                        Cart.create({
+                            userID: user._id,
+                            cartItems: []
+                        })
+                    }
                 })
             )
         }

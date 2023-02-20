@@ -48,7 +48,12 @@ export const getVoucherById = asyncHandler(async (req, res) => {
 
 export const createVoucher = asyncHandler(async (req, res) => {
   const { name, type, description, discount, maxValue, isActive, expireAt } = req.body;
-  const expireAtDate = new Date(expireAt);
+  let expireAtDate = Date.now()
+  if (expireAt)
+    expireAtDate = new Date(Date(expireAt).valueOf() + 30 * 1000 * 24 * 3600);
+  else 
+    expireAtDate = new Date(Date.now() + 30 * 1000 * 24 * 3600)
+  console.log(expireAtDate)
   const newVoucher = await Voucher.create({
     name,
     type,
@@ -56,9 +61,22 @@ export const createVoucher = asyncHandler(async (req, res) => {
     discount,
     maxValue,
     isActive,
-    expireAt: Date.now()
+    expireAt: new Date(expireAtDate)
   });
   if (newVoucher) {
+    if (newVoucher.isActive) {
+      const users = await User.find({});
+      if (users) {
+        await Promise.all(
+          users.map((user) => {
+            if (user.role === 3) {
+              user.listVouchers.push(newVoucher._id);
+              user.save();
+            }
+          })
+        )
+      }
+    }
     res.status(201).json({
       _id: newVoucher._id,
       name: newVoucher.name,
@@ -79,6 +97,34 @@ export const deleteVoucher = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const voucher = await Voucher.findById(id);
   if (voucher) {
+    if (voucher.isActive) {
+      const users = await User.find({});
+      if (users) {
+        // res.status(200).json(users)
+
+        await Promise.all(
+          users.map((user) => {
+            if (user.role === 3) {
+              user.listVouchers = user.listVouchers.filter((voucherItem) => JSON.stringify(voucherItem._id) !== JSON.stringify(id))
+              // const newListVoucher = []
+              // if (user.listVouchers?.length != 0) {
+              //   user.listVouchers?.forEach(voucherItem => {
+              //     if (JSON.stringify(voucherItem._id) !== JSON.stringify(id)) {
+              //       newListVoucher.push(voucherItem)
+              //     }
+              //   });
+              //   user.listVouchers = newListVoucher
+              // }
+              
+              user.save();
+              // console.log(user.listVouchers)
+            }
+          })
+        )
+      }
+      const newUsers = await User.find({})
+      // res.status(201).json(newUsers)
+    }
     const deletedVoucher = voucher;
     await voucher.remove();
     res.status(200).json({

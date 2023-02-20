@@ -793,3 +793,122 @@ form .input-group {
   line-height: 22px;
   margin-bottom: 7px;
 }
+
+/* Modal */
+.modal-container {
+  position: fixed;
+  background: rgba(54, 52, 52, 0.8);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* overflow: hidden; */
+}
+
+.scroll-box {
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 75%;
+  padding-bottom: 10px;
+}
+
+
+.modal-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: #000;
+}
+
+.modal-body-wrap {
+  background: white;
+  width: 600px;
+  height: 550px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  position: relative;
+  color: #555;
+}
+
+.hide {
+  display: none;
+}
+
+.voucher-card {
+  position: relative;
+}
+
+.voucher-card .border-product {
+  min-height: 170px;
+}
+
+.voucher-card input {
+  width: 30px;
+}
+
+.voucher-card input:hover {
+  cursor: pointer;
+}
+
+.checked {
+  background-color: #d9f2fa;
+}
+
+.voucher-card .voucher-left-header {
+  color: #ffffff;
+}
+
+.voucher-card .voucher-left-header.ship {
+  background: #0ba172;
+}
+
+.voucher-card .voucher-left-header.discount {
+  background-color: #de6418;
+}
+
+.voucher-name {
+  color: #000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.voucher-description {
+  font-size: 14px;
+  padding: 0 10px;
+}
+
+.voucher-abs {
+  position: absolute;
+  bottom: 5px;
+  font-size: 14px;
+}
+
+.voucher-expire i {
+  color: red;
+}
+
+.voucher-active span {
+  color: #0ba172;
+}
+
+.voucher-section-item {
+  margin-bottom: 10px;
+}
+
+.voucher-list {
+  padding-bottom: 30px;
+}
+
+.voucher-pagination {
+  margin-top: 20px
+}
+
+
+
+
+/* .voucher-expire, .voucher-active {
+  font-size: 18px;
+} */

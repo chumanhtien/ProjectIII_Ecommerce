@@ -5,7 +5,7 @@ import { USER_INFO_FAIL, USER_INFO_REQUEST, USER_INFO_RESET, USER_INFO_SUCCESS, 
 import { URL } from "../URL";
 
 // LOGIN
-export const login = (email, password) => async (dispatch) => {
+export const login = (email, password) => async (dispatch, getState) => {
     try {
         dispatch({type: USER_LOGIN_REQUEST});
 
@@ -20,7 +20,36 @@ export const login = (email, password) => async (dispatch) => {
             config
         );
         dispatch({type: USER_LOGIN_SUCCESS, payload: data});
-        localStorage.setItem("userInfo", JSON.stringify(data));
+        await localStorage.setItem("userInfo", JSON.stringify(data));
+        const { userLogin: { userInfo }
+        } = getState(); 
+        if (userInfo) {
+            const userID = userInfo._id
+            const token = userInfo.token
+
+            // console.log(userID)
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    // Authorization: `Bearer ${token}`,
+                },
+            }; 
+
+            const { data } = await axios.get(
+                `${URL}/api/cart`,
+                { userID: userID },
+                config
+            );
+
+            // if (data)
+            //     console.log(data)
+
+            dispatch({
+                type: CART_SAVE_FROM_DB,
+                payload: data.cartItems
+            })
+            localStorage.setItem("cartItems", JSON.stringify(data.cartItems))
+        }
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,
@@ -50,14 +79,14 @@ export const logout = () => async (dispatch, getState) => {
     await axios.post(
         `${URL}/api/cart/save`,
         {
-            userID,
-            cartItems
+            userID: userID,
+            cartItems: cartItems
         },
         config
     )
 
     localStorage.removeItem("userInfo");
-    // localStorage.removeItem("cartItems")
+    localStorage.removeItem("cartItems")
     dispatch({type: USER_LOGOUT});
     dispatch({type: USER_INFO_RESET});
     dispatch({type: ORDER_GET_ALL_USER_ORDER_RESET});

@@ -33,6 +33,75 @@ const PlaceOrderScreen = () => {
   if (order)
     console.log("Payment method", order.paymentMethod, " Cart: ", cart.paymentMethod);
   const navigate = useNavigate();
+
+  let voucherItems = [
+  {
+    _id: '001',
+    name: 'Miễn phí vẫn chuyển',
+    type: 1,
+    description: 'Miễn phí vận chuyển (Lên tới 20k)',
+    discount: 20,
+    maxValue: -1,
+    minValueOfOrderRequire: -1,
+    isActive: false,
+    expireAt: Date.now() + 1*3600*24*1000
+  },
+  {
+    _id: '002',
+    name: 'Giảm giá 50k',
+    type: 3,
+    description: 'Giảm giá 50k cho đơn hàng từ 500k trở lên',
+    discount: 20,
+    maxValue: 30,
+    minValueOfOrderRequire: 500,
+    isActive: false,
+    expireAt: Date.now() + 1*3600*24*1000
+  },
+  {
+    _id: '003',
+    name: 'Giảm giá 30k',
+    type: 3,
+    description: 'Giảm giá 30k cho đơn hàng của bạn',
+    discount: 30,
+    maxValue: -1,
+    minValueOfOrderRequire: -1,
+    isActive: false,
+    expireAt: Date.now() + 1*3600*24*1000
+  },
+  {
+    _id: '004',
+    name: 'Giảm giá 50k',
+    type: 3,
+    description: 'Giảm giá 50k cho đơn hàng của bạn',
+    discount: 50,
+    maxValue: -1,
+    minValueOfOrderRequire: -1,
+    isActive: false,
+    expireAt: Date.now() + 1*3600*24*1000
+  },
+  {
+    _id: '005',
+    name: 'Giảm giá 10%',
+    type: 2,
+    description: 'Giảm giá 10% cho đơn hàng của bạn, tối đa 50k',
+    discount: 10,
+    maxValue: 50,
+    minValueOfOrderRequire: -1,
+    isActive: false,
+    expireAt: Date.now() + 100*3600*24*1000
+  },
+  {
+    _id: '006',
+    name: 'Giảm giá 5%',
+    type: 2,
+    description: 'Giảm giá 5% cho đơn hàng của bạn, tối đa 40k',
+    discount: 5,
+    maxValue: 50,
+    minValueOfOrderRequire: -1,
+    isActive: false,
+    expireAt: Date.now() + 1*3600*24*10000
+  }
+  ] 
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`);
@@ -255,7 +324,7 @@ const PlaceOrderScreen = () => {
       <CalltoActionSection />
       <ContactInfo />
       <Footer />
-      {showModal && <AddVoucherModal showModal={showModal} setShowModal={setShowModal} />}
+      {showModal && <AddVoucherModal showModal={showModal} setShowModal={setShowModal} listVoucher={ voucherItems} />}
     </>
     
   );

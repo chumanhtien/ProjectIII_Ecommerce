@@ -21,13 +21,15 @@ voucherRouter.get(
 //CREATE A NEW VOUHCER
 voucherRouter.post(
   "/create",
-  // admin,
+  protect,
+  admin,
   VoucherController.createVoucher
 );
 
 //DELETE A NEW VOUCHER
 voucherRouter.delete(
   "/:id/delete",
+  protect,
   admin,
   VoucherController.deleteVoucher
 );

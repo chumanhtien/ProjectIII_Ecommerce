@@ -7,7 +7,7 @@ const Pagination = (props) => {
   return (
     pages > 1 && (
       <nav>
-        <ul className="pagination justify-content-center">
+        <ul className={`pagination justify-content-center ${category === "vouchers" ? "voucher-pagination" : ""}`}>
           {
             [...Array(pages).keys()].map((x, index) => (
               <li className={`page-item ${x + 1 === page ? "active" : ""}`} key={x + 1}>

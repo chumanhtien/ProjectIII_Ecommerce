@@ -42,11 +42,11 @@ const Header = () => {
     }
   }
 
-  useEffect(() => {
-    if (userInfo?._id) {
-      dispatch(saveCartStateFromDB(userInfo._id))
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (userInfo?._id) {
+  //     dispatch(saveCartStateFromDB())
+  //   }
+  // }, [])
   return (
     <div>
       {/* Top Header */}
@@ -138,7 +138,10 @@ const Header = () => {
                     )
                   }
                   
-                  <Link to="/cart" className="cart-mobile-icon">
+                  <Link to="/vouchers" className="cart-mobile-icon">
+                    <i className="fas fa-ticket"></i>
+                  </Link>
+                  <Link to="/cart" className="cart-mobile-icon" style={{"margin-left": "10px"}}>
                     <i className="fas fa-shopping-bag"></i>
                     <span className="badge">{userInfo && cartItems.length}</span>
                   </Link>
@@ -278,9 +281,12 @@ const Header = () => {
                 }
                 
 
-                <Link to="/cart">
-                  <i className="fas fa-shopping-bag"></i>
-                  <span className="badge">{userInfo && cartItems.length}</span>
+                <Link to="/vouchers" title="Mã giảm giá">
+                  <i className="fas fa-ticket"></i>
+                </Link>
+                <Link to="/cart" style={{ "margin-left": "15px" }} title="Giỏ hàng">
+                    <i className="fas fa-shopping-cart"></i>
+                    <span className="badge">{userInfo && cartItems.length}</span>
                 </Link>
               </div>
             </div>

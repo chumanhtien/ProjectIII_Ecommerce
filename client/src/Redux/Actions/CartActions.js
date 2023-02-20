@@ -53,26 +53,39 @@ export const savePaymentMethod = (data) => (dispatch) => {
 }
 
 //SAVE CART FROM DB
-export const saveCartStateFromDB = (userID) => async (dispatch, getState) => {
-    const { userLogin: { userInfo }
-    } = getState();
-          
-    const config = {
-        headers: {
-            "Content-Type": "application/json",
-            // Authorization: `Bearer ${userInfo.token}`,
-        },
-    }; 
+export const saveCartStateFromDB = () => async (dispatch, getState) => {
+    try {
+        const {
+            userLogin: { userInfo }, 
+        } = getState();
 
-    const { data } = await axios.get(
-        `${URL}/api/cart`,
-        config
-    )
+        // console.log('token:', userInfo.token)
+        const userID = userInfo._id
+        // console.log(userID)
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${userInfo.token}`,
+            },
+        }; 
 
-    dispatch({
-        type: CART_SAVE_FROM_DB,
-        payload: data
-    })
+        const { data } = await axios.get(
+            `${URL}/api/cart`,
+            {userID},
+            config
+        )
 
-    localStorage.setItem("cartItems", JSON.stringify(data))
+        if (data)
+            console.log(data)
+
+        dispatch({
+            type: CART_SAVE_FROM_DB,
+            payload: data.cartItems
+        })
+
+        localStorage.setItem("cartItems", JSON.stringify(data.cartItems))
+    } catch (error) {
+        console.log(error.response.data.message)
+    }
+    
 }

@@ -9,7 +9,7 @@ import Toy from "../Models/ProductModels/ToyModel.js";
 
 export const getCartOfUserLogin = asyncHandler(async (req, res) => {
   const { userID } = req.body;
-  const lastCart = await Cart.findOne({ userID: userID })
+  const lastCart = await Cart.findOne({...userID})
 
   let cartInfoToLocal = {cartItems: []}
   if (lastCart) {
@@ -21,32 +21,33 @@ export const getCartOfUserLogin = asyncHandler(async (req, res) => {
           let cartItemInfo = {}
           switch (category) {
             case 'shoes': {
-              cartItemInfo = await Shoe.findById(cartItem.productID)
+              cartItemInfo = await Shoe.findById(cartItem.productId)
               break;
             }
             case 'mobiles': {
-              cartItemInfo = await Mobile.findById(cartItem.productID)
+              cartItemInfo = await Mobile.findById(cartItem.productId)
               break;
             }
             case 'manclothes': {
-              cartItemInfo = await ManClothes.findById(cartItem.productID);
+              cartItemInfo = await ManClothes.findById(cartItem.productId);
               break;
             }
             case 'babymom': {
-              cartItemInfo = await BabyMom.findById(cartItem.productID);
+              cartItemInfo = await BabyMom.findById(cartItem.productId);
               break;
             }
             case 'toys': {
-              cartItemInfo = await Toy.findById(cartItem.productID);
+              cartItemInfo = await Toy.findById(cartItem.productId);
               break;
             }
           }
           if (cartItemInfo) {
             return {
               category: cartItem.category,
-              productID: cartItem.productID,
+              productId: cartItem.productId,
               name: cartItemInfo.name,
               image: cartItemInfo.image,
+              price: cartItemInfo.price,
               countInStock: cartItemInfo.countInStock,
               qty: cartItem.qty,
               types: {
@@ -60,6 +61,7 @@ export const getCartOfUserLogin = asyncHandler(async (req, res) => {
       // res.json(lastCart)
     }
     res.json(cartInfoToLocal)
+    // res.json(lastCart)
   } else {
     res.status(404)
     throw new Error ("Lỗi, không tìm thấy thông tin Cart")
@@ -67,45 +69,50 @@ export const getCartOfUserLogin = asyncHandler(async (req, res) => {
 })
 
 export const saveCartFromLocalStoragetoDB = asyncHandler(async (req, res) => {
-  const { userID, cartItems } = req.body;
-  // const cartItems = [
-  //   {
-  //     category: "shoes",
-  //     countInStock: 100,
-  //     image: "/images/shoes/4.png",
-  //     name: "Sesame Street Unisex-Child ELMO Puppet Slipper",
-  //     price: 929,
-  //     productId: "628dbf26cbaf0ec946fb4e08",
-  //     qty: 1,
-  //     types: {size: "37", color: ""}
-  //   }
-  // ]
+  try {
+    const { userID, cartItems } = req.body;
+    // const cartItems = [
+    //   {
+    //     category: "shoes",
+    //     countInStock: 100,
+    //     image: "/images/shoes/4.png",
+    //     name: "Sesame Street Unisex-Child ELMO Puppet Slipper",
+    //     price: 929,
+    //     productId: "628dbf26cbaf0ec946fb4e08",
+    //     qty: 1,
+    //     types: {size: "37", color: ""}
+    //   }
+    // ]
 
-  if (cartItems) {
-    let cartItemsToDB = cartItems.map((cartItem) => {
-      return {
-        productID: cartItem.productId,
-        category: cartItem.category,
-        //name: cartItem.name,
-        //image: cartItem.image
-        qty: cartItem.qty,
-        color: cartItem.types.color,
-        size: cartItem.types.size
-      }
-    })
-    
-    let lastCart = await Cart.findOne({ userID: userID })
-    if (lastCart) {
-      lastCart.cartItems = cartItemsToDB
-      await lastCart.save()
+    if (cartItems) {
+      console.log(cartItems);
+      let cartItemsToDB = cartItems.map((cartItem) => {
+        return {
+          productId: cartItem.productId,
+          category: cartItem.category,
+          //name: cartItem.name,
+          //image: cartItem.image
+          qty: cartItem.qty,
+          color: cartItem.types.color,
+          size: cartItem.types.size
+        }
+      })
+      
+      let lastCart = await Cart.findOne({ userID: userID })
       if (lastCart) {
-        res.json(lastCart)
-      } else {
-        res.status(403);
-        throw Error("Lỗi không thể lưu cartItems to DB")
+        lastCart.cartItems = cartItemsToDB
+        lastCart.save()
+        if (lastCart) {
+          res.json(lastCart)
+        } else {
+          res.status(403);
+          throw Error("Lỗi không thể lưu cartItems to DB")
+        }
       }
+      
     }
-    
+  } catch (error) {
+    console.log(error.response.data.message)
   }
     
 })

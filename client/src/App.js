@@ -20,6 +20,7 @@ import { useDispatch } from "react-redux";
 import NewsScreen from "./screens/NewsScreen";
 import SingleNew from "./screens/SingleNew";
 import { CurrrencyFormatter } from "./components/converterComponents/CurrencyFormatter";
+import VouchersScreen from "./screens/VouchersScreen";
 
 const App = () => {
   // console.log("URL: ", process.env);
@@ -83,7 +84,13 @@ const App = () => {
       <Route path="/news/:filter/page/:pageNumber" element={<NewsScreen category='news'/> } 
         exact 
       />
-  
+        
+      <Route path="/vouchers" element={<VouchersScreen category='vouchers'/> } 
+        exact 
+      />
+      <Route path="/vouchers/page/:pageNumber" element={<VouchersScreen category='vouchers'/> } 
+        exact 
+      />
   
       <Route path="/mobiles" element={<HomeScreen category={"mobiles"}/>} />
       <Route path="/shoes" element={<HomeScreen category={"shoes"}/>} />

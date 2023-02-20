@@ -22,6 +22,7 @@ const NUMBER_NEWS_PER_PAGE = 3;
 const NewsSection = (props) => {
   const {category} = props;
 
+  console.log(category)
   //Pagination
   let pages = 0;
   let page = Number(useParams().pageNumber);
@@ -246,11 +247,18 @@ const NewsSection = (props) => {
             
                 {/* Pagination */}
                 {pages > 1 && (
-                  <NewPagination
-                  pages={pages} 
-                  page={page} 
-                  keyword={keyword ? keyword : ""}
-                  filterByID={filterByID}
+                  // <NewPagination
+                  //   pages={pages} 
+                  //   page={page} 
+                    // keyword={keyword ? keyword : ""}
+                    // filterByID={filterByID}
+                  // />
+                  <Pagination
+                    pages={pages}
+                    page={page}
+                    keyword={keyword ? keyword : ""}
+                    filterByID={filterByID}
+                    category={category}
                   />
                 )}
                 
