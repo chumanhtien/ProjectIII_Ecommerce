@@ -308,7 +308,7 @@ productRouter.get(
     asyncHandler(async (req, res) => {
         const keyword = req.query.keyword ? {
             title: {
-                $regex: req.query.keyword,
+                $regex: req.query.keyword.trim(),
                 $options: "i",
             },
         }

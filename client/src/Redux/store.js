@@ -5,6 +5,7 @@ import { babymomListReducer, manClothesListReducer, mobilesListReducer, newsList
 import { cartReducer } from "./Reducers/CartReducers";
 import { userInfoReducer, userLoginReducer, userRegisterReducer, userUpdateProfileReducer } from "./Reducers/UserReducers";
 import { orderCreateReducer, orderDeleteReducer, orderDetailsReducer, orderListOfUserReducer, orderPayReducer } from "./Reducers/OrderReducers";
+import { voucherListReducer } from "./Reducers/VoucherReducers";
 
 const reducer = combineReducers({
     shoesList: shoesListReducer,
@@ -32,6 +33,8 @@ const reducer = combineReducers({
     orderPay: orderPayReducer,
     orderListOfUser: orderListOfUserReducer,
     orderDelete: orderDeleteReducer,
+
+    voucherList: voucherListReducer
 
 });
 

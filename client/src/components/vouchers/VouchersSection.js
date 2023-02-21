@@ -9,16 +9,16 @@ import Pagination from "../homeComponents/pagination";
 // import babymomProducts from "../../data/babymom";
 // import axios from 'axios';
 import {useDispatch, useSelector} from "react-redux";
-import { getListNews } from "../../Redux/Actions/ProductActions";
 import Message from "../LoadingError/Error";
 import Loading from "../LoadingError/Loading";
 // import CurrencyFormat from "react-currency-format";
 import NewPagination from "../homeComponents/NewPagination";
 import { useNavigate, useParams } from "react-router";
 import moment from "moment";
-import Voucher from "./Voucher";
+import { getListVouchersOfUser } from "../../Redux/Actions/VoucherActions";
+import VoucherPagination from "../homeComponents/VoucherPagination";
 
-const NUMBER_NEWS_PER_PAGE = 3;
+const NUMBER_VOUCHERS_PER_PAGE = 4;
 
 const VouchersSection = (props) => {
   const {category} = props;
@@ -26,7 +26,6 @@ const VouchersSection = (props) => {
   console.log(category)
   //Pagination
   let pages = 0;
-  pages = 6;
   let page = Number(useParams().pageNumber);
   if (!page)
     page = 1;
@@ -36,135 +35,38 @@ const VouchersSection = (props) => {
   const [sortByTime, setSortByTime] = useState("");
 
   //Search
-  const [keyword, setKeyword] = useState("");
+  const [newKeyword, setNewKeyword] = useState("");
   // console.log("keyword: ", keyword);
 
-  // const dispatch = useDispatch();
-  // const newsList = useSelector((state) => state.newsList);
-  // const {loading, error, vouchers} = vouchersList;
+  const dispatch = useDispatch();
+  const voucherList = useSelector((state) => state.voucherList);
+  const {loading, error, vouchers} = voucherList;
 
-  const loading = false; const error = false;
+  // const loading = false; const error = false;
   useEffect(() => {
-    // dispatch(getListNews());
-  }, []);
+    dispatch(getListVouchersOfUser());
+  }, [dispatch]);
 
-  let voucherItems = [
-  {
-    _id: '001',
-    name: 'Miễn phí vẫn chuyển',
-    type: 1,
-    description: 'Miễn phí vận chuyển (Lên tới 20k)',
-    discount: 20,
-    maxValue: -1,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*1000
-  },
-  {
-    _id: '002',
-    name: 'Giảm giá 50k',
-    type: 3,
-    description: 'Giảm giá 50k cho đơn hàng từ 500k trở lên',
-    discount: 20,
-    maxValue: 30,
-    minValueOfOrderRequire: 500,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*1000
-  },
-  {
-    _id: '003',
-    name: 'Giảm giá 30k',
-    type: 3,
-    description: 'Giảm giá 30k cho đơn hàng của bạn',
-    discount: 30,
-    maxValue: -1,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*1000
-  },
-  {
-    _id: '004',
-    name: 'Giảm giá 50k',
-    type: 3,
-    description: 'Giảm giá 50k cho đơn hàng của bạn',
-    discount: 50,
-    maxValue: -1,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*1000
-  },
-  {
-    _id: '005',
-    name: 'Giảm giá 10%',
-    type: 2,
-    description: 'Giảm giá 10% cho đơn hàng của bạn, tối đa 50k',
-    discount: 10,
-    maxValue: 50,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 100*3600*24*1000
-  },
-  {
-    _id: '006',
-    name: 'Giảm giá 5%',
-    type: 2,
-    description: 'Giảm giá 5% cho đơn hàng của bạn, tối đa 40k',
-    discount: 5,
-    maxValue: 50,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*10000
+  let voucherItems = []
+  if (vouchers) {
+    voucherItems = vouchers
   }
-  ]
 
+  //  pagination
+  if (voucherItems) {
+    pages = voucherItems ? Math.ceil(voucherItems.length / NUMBER_VOUCHERS_PER_PAGE) : 0;
+    // console.log(" News Pages: ", pages);
+  }
 
-  // if (vouchers) {
-  //   //Filter by ID
-  //   switch(filterByID) {
-  //     case 'noibo':
-  //       newItems = news.filter((newItem) => newItem.source.id === 'noibo')
-  //       break;
-  //     case 'other':
-  //       newItems = news.filter((newItem) => newItem.source.id !== 'noibo')
-  //       break;
-  //     default:
-  //       newItems = news;
-  //   }
-
-  //   // console.log(newItems);
-
-  //   //sortBy
-  //   switch(sortByTime) {
-  //     case 'newest':
-  //       newItems = newItems.sort((a, b) => Number(moment(b.publishedAt).diff(moment(a.publishedAt))))
-  //       break;
-  //     case 'oldest':
-  //       newItems = newItems.sort((a, b) => Number(moment(a.publishedAt).diff(moment(b.publishedAt))))
-  //       break;
-  //     default:
-  //       newItems = newItems;
-  //   }
-
-    
-  //   //
-  //   if (newItems) {
-  //     pages = newItems ? Math.ceil(newItems.length / NUMBER_NEWS_PER_PAGE) : 0;
-  //     console.log(" News Pages: ", pages);
-  //   }
-
-  // }
-
-  
-  //panigation
-  // if (newItems && page) {
-  //   newItems = newItems.slice((page - 1) * NUMBER_NEWS_PER_PAGE, page * NUMBER_NEWS_PER_PAGE);
-  // }
+  if (voucherItems && page) {
+    voucherItems = voucherItems.slice((page - 1) * NUMBER_VOUCHERS_PER_PAGE, page * NUMBER_VOUCHERS_PER_PAGE);
+  }
 
   const navigate = useNavigate();
   const submitHandler = (e) => {
     e.preventDefault();
-    // dispatch(getListNews(keyword));
-    // navigate(keyword ? (`/news/search/keyword=\'${keyword}\'`): (`/news`))
+    // dispatch(getListVouchersOfUser(newKeyword));
+    // navigate(newKeyword ? (`/vouchers/search/keyword=\'${newKeyword}\'`): (`/vouchers`))
   }
   return (
     <>
@@ -180,10 +82,10 @@ const VouchersSection = (props) => {
                         <div className="input-group">
                           <input
                             type="search"
-                            value={keyword}
+                            value={newKeyword}
                             className="form-control"
                             placeholder="Tìm kiếm mã giảm giá"
-                            onChange={(e) => setKeyword(e.target.value)}
+                            onChange={(e) => setNewKeyword(e.target.value)}
                           />
                           <button className="btn btn-dark" type="button" onClick={submitHandler}>
                             <i className="far fa-search" ></i>
@@ -225,59 +127,13 @@ const VouchersSection = (props) => {
                   {loading ? <Loading/> : error ? <Message variant={"alert-danger"}>{error}</Message> : (
                     <div className=" voucher-list row col-lg-12 p-2">
                       {voucherItems && voucherItems.map((voucher, index) => (
-                        // <div className="shop col-lg-6 col-md-6 col-sm-6 mt-4 voucher-card">
-                        //   <div className="border-product shadow-sm">
-                        //     <div className="d-flex flex-row h-100 w-100">
-                        //       <div className="p-2 col-3 d-flex text-center align-items-center voucher-left-header ship">Shipping Voucher</div>
-                        //       <div className="p-1 h-100 col-7">
-                        //         <div className="p-1 h-80 text-info">
-                        //           <div className="voucher-id">Mã: {voucher.id ? voucher.id : 'ID mã giảm giá'}</div>
-                        //           <div className="voucher-name">{voucher.name ? voucher.name : "Tên"}</div>
-                        //           <div className="voucher-description">{voucher.description ? voucher.description : "Mô tả"}</div>
-                        //           <div className="voucher-expire">Hạn đến: {voucher?.expireAt ? `${moment(new Date(voucher.expireAt)).format("h:m:s")} ngày ${moment(new Date(voucher.expireAt)).format("D/M/Y")}` : ''}</div></div>
-                        //         <div className="d-flex flex-column h-20">
-                        //           <div className="d-flex flex-row justify-content-evenly">
-                        //             {!voucher.isActive ?
-                        //               <button
-                        //                 onClick={() => console.log("active")}
-                        //                 className="btn btn-success col-9">
-                        //                 <span>KÍCH HOẠT</span>
-                        //               </button> :
-                        //               <button
-                        //                 onClick={() => console.log("active")}
-                        //                 className="btn btn-danger col-9">
-                        //                 <span>HỦY KÍCH HOẠT</span>
-                        //               </button>}
-                        //           </div>
-                        //         </div>
-                        //       </div>
-                        //       <div className="p-2 col-2 d-flex flex-column justify-content-evenly action">
-                        //         <Link
-                        //           to={`#`}
-                        //           className="btn btn-sm btn-outline-success p-1 pb-2"
-                        //         >
-                        //           <i className="fas fa-eye"></i>
-                        //           {/* <FontAwesomeIcon className="icon" icon={solid('eye')} /> */}
-                        //         </Link>
-                        //         <Link
-                        //           to="#"
-                        //           onClick={() => console.log("Delete voucher")}
-                        //           className="btn btn-sm btn-outline-danger p-1 pb-2"
-                        //         >
-                        //           <i className="fas fa-trash"></i>
-                        //           {/* <FontAwesomeIcon className="icon" icon={solid('trash')} /> */}
-                        //         </Link>
-                        //       </div>
-                        //     </div>
-                        //   </div>
-                        // </div>
-                        <div className={`voucher-section-item col-lg-6 col-md-6 col-sm-12 mt-2 voucher-card`}>
+                        <div className={`voucher-section-item col-lg-6 col-md-11 col-sm-12 mt-2 voucher-card`}>
                           <div className={`d-flex flex-row border-product shadow-sm`}>
                             <div className={`p-2 col-3 d-flex text-center align-items-center voucher-left-header ${voucher.type === 1 ? "ship" : "discount"}`}>{voucher.type === 1 ? "Shipping Voucher" : "T-Ecommerce Voucher"}</div>
                             <div className="p-1 h-100 col-9">
                               <div className="p-1 h-80">
-                                <div className="voucher-id">Mã: {voucher._id ? voucher._id : 'ID mã giảm giá'}</div>
-                                <div className="voucher-name">{voucher.name ? voucher.name : "Tên"}</div>
+                                <div title={voucher._id} className="voucher-id">Mã: {voucher._id ? voucher._id : 'ID mã giảm giá'}</div>
+                                <div title={voucher.name} className="voucher-name">{voucher.name ? voucher.name : "Tên"}</div>
                                 <div className="voucher-description">{voucher.description ? voucher.description : "Mô tả"}</div>
                                 <div className="voucher-abs">
                                   <div className="voucher-active">Trạng thái: <span >{voucher.isActive ? "Đang kích hoạt" : "Chưa kích hoạt"}</span></div>
@@ -321,12 +177,11 @@ const VouchersSection = (props) => {
                     // keyword={keyword ? keyword : ""}
                     // filterByID={filterByID}
                   // />
-                  <Pagination
+                  <VoucherPagination
                     pages={pages}
                     page={page}
-                    keyword={keyword ? keyword : ""}
+                    keyword={newKeyword ? newKeyword : ""}
                     filterByID={filterByID}
-                    category={category}
                   />
                 )}
                 

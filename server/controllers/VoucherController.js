@@ -288,3 +288,36 @@ export const getAllVouchersByAdmin = asyncHandler(async (req, res) => {
     throw new Error("Lỗi. Không tìm được danh sách Voucher");
   }
 })
+
+export const getAllVouchersOfUser = asyncHandler(async (req, res) => {
+  const keyword = req.query.keyword ? {
+    name: {
+      $regex: req.query.keyword.trim(),
+      $options: "i",
+    },
+  }
+  : {};
+  const userID = req.user._id;
+  const user = await User.findById(userID);
+  if (user) {
+    let listVouchersID = []
+    if (user.role === 3) {
+      if (user.listVouchers) {
+        user.listVouchers.map((voucherItem) => {
+          listVouchersID.push(voucherItem._id)
+        })
+        const listVouchers = await Voucher.find({...keyword}).where('_id').in(listVouchersID);
+        // listVouchers = listVouchers.find({...keyword})
+        res.status(200).json(listVouchers);
+      } else {
+        res.status(200).json([]);
+      }
+    } else {
+      res.status(401);
+      throw new Error("Chức năng chỉ dành cho tìm kiếm voucher của tài khoản Khách hàng")
+    }
+  } else {
+    res.status(404);
+    throw new Error("Không tìm thấy user để tìm voucher của user với userID = ", userID);
+  }
+})

@@ -77,6 +77,14 @@ const OrderDetailProducts = (props) => {
               <dl className="dlist"> 
                 <dt>VAT:</dt> <dd>{CurrencyFormatter(order.taxPrice)}</dd>
               </dl>
+              {order.voucherID &&
+                <dl className="dlist"> 
+                  <dt>Mã giảm giá:</dt> <dd><Link to={`/vouchers/${order.voucherID}/edit`}>{order.voucherID}</Link></dd>
+                </dl>
+              }
+              <dl className="dlist"> 
+                <dt>Giảm giá:</dt> <dd style={{color: 'red'}}>{CurrencyFormatter(order.discountPrice)}</dd>
+              </dl>
               <dl className="dlist">
                 <dt>Tổng chi phí:</dt>
                 <dd>

@@ -275,7 +275,7 @@ const OrderScreen = () => {
                         </td>
                         <td>
                           {/* <CurrencyFormat value={order.taxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
-                          {CurrencyFormatter(order.taxPrice)}
+                          {CurrencyFormatter(order.discountPrice)}
                         </td>
                       </tr>
                       <tr>
@@ -288,7 +288,18 @@ const OrderScreen = () => {
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                    </table>
+                  <div className="add-voucher w-100">
+                    {order.voucherID &&
+                      <div className="d-flex flex-row">
+                        <div className="alert alert-success">
+                          <span>Mã giảm giá: </span>
+                          <span className="add-voucher-id">{order.voucherID + " "}</span>
+                            
+                        </div>
+                      </div>
+                    }
+                  </div>
                   {/* <PayPalButtons amount={order.totalPrice} onSuccess={successPaymentHandler} /> */}
                   {
                     (!order.isPaid && order.paymentMethod === "Paypal") && (

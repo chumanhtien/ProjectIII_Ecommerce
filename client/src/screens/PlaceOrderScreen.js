@@ -13,17 +13,21 @@ import ContactInfo from "../components/homeComponents/ContactInfo";
 import Footer from "../components/Footer";
 import { CurrencyFormatter } from "../components/converterComponents/CurrencyFormatter";
 import AddVoucherModal from "../components/modals/AddVoucherModal";
+import { getListVouchersOfUser } from "../Redux/Actions/VoucherActions";
 
 
 const PlaceOrderScreen = () => {
   window.scrollTo(0, 0);
 
   const [showModal, setShowModal] = useState(false)
+  const [voucherID, setVoucherID] = useState("");
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const userLogin = useSelector((state) => state.userLogin);
-  const {userInfo} = userLogin;
+  const { userInfo } = userLogin;
+  const voucherList = useSelector((state) => state.voucherList);
+  const { vouchers, success: successVouchers, error: errorVouchers } = voucherList;
   if (cart)
     console.log(cart.paymentMethod);
 
@@ -34,81 +38,17 @@ const PlaceOrderScreen = () => {
     console.log("Payment method", order.paymentMethod, " Cart: ", cart.paymentMethod);
   const navigate = useNavigate();
 
-  let voucherItems = [
-  {
-    _id: '001',
-    name: 'Miễn phí vẫn chuyển',
-    type: 1,
-    description: 'Miễn phí vận chuyển (Lên tới 20k)',
-    discount: 20,
-    maxValue: -1,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*1000
-  },
-  {
-    _id: '002',
-    name: 'Giảm giá 50k',
-    type: 3,
-    description: 'Giảm giá 50k cho đơn hàng từ 500k trở lên',
-    discount: 20,
-    maxValue: 30,
-    minValueOfOrderRequire: 500,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*1000
-  },
-  {
-    _id: '003',
-    name: 'Giảm giá 30k',
-    type: 3,
-    description: 'Giảm giá 30k cho đơn hàng của bạn',
-    discount: 30,
-    maxValue: -1,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*1000
-  },
-  {
-    _id: '004',
-    name: 'Giảm giá 50k',
-    type: 3,
-    description: 'Giảm giá 50k cho đơn hàng của bạn',
-    discount: 50,
-    maxValue: -1,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*1000
-  },
-  {
-    _id: '005',
-    name: 'Giảm giá 10%',
-    type: 2,
-    description: 'Giảm giá 10% cho đơn hàng của bạn, tối đa 50k',
-    discount: 10,
-    maxValue: 50,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 100*3600*24*1000
-  },
-  {
-    _id: '006',
-    name: 'Giảm giá 5%',
-    type: 2,
-    description: 'Giảm giá 5% cho đơn hàng của bạn, tối đa 40k',
-    discount: 5,
-    maxValue: 50,
-    minValueOfOrderRequire: -1,
-    isActive: false,
-    expireAt: Date.now() + 1*3600*24*10000
-  }
-  ] 
+  // console.log("voucherID: ", voucherID)
+  let voucherItems = [] 
+  let voucherAdd = {}
+  
   useEffect(() => {
     if (success) {
       navigate(`/order/${order._id}`);
       // window.location.href = `/order/${order._id}`;
       dispatch({type: ORDER_CREATE_RESET});
     }
-
+    dispatch(getListVouchersOfUser())
   }, [navigate, dispatch, success, order]);
 
 
@@ -121,14 +61,55 @@ const PlaceOrderScreen = () => {
     cart.cartItems.reduce((price, item) => price + item.price*item.qty, 0)
   );
 
+
   //Shipping price: itemPrice >= $500 or number of shoes >= 3 => cost = 0 else cost = 6$
-  cart.shippingPrice = ((cart.cartItems.length >= 3 || cart.itemsPrice >= 500) ? 0 : 5);
+  cart.shippingPrice = ((cart.cartItems.length >= 3 && cart.itemsPrice >= 1000) ? 100 : 50);
   
   // Tax: 6.6%
   cart.taxPrice = addDemicals(Number(0.066 * cart.itemsPrice));
     //total
   cart.totalPrice = addDemicals(Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice));
   
+  // check voucher 
+  if (vouchers) {
+    voucherItems = vouchers.filter((voucher) => (Number(voucher.minValueOfOrderRequire) === -1) || (Number(voucher.minValue) <= cart.totalPrice));
+    // console.log(voucherItems);
+    if (voucherID) {
+      let voucherAddFilter = voucherItems.filter((voucherItem) => voucherItem._id === voucherID);
+      voucherAdd = voucherAddFilter[0];
+      // console.log("voucher Add: ", voucherAdd)
+      if (voucherAdd) {
+        switch (Number(voucherAdd.type)) {
+          case 1: {
+            cart.discountPrice = voucherAdd.discount > cart.shippingPrice ? cart.shippingPrice : voucherAdd.discount
+            cart.totalPrice -= cart.discountPrice
+            break;
+          }
+          case 2: {
+            if (Number(voucherAdd.maxValue) === -1) {
+              cart.discountPrice = voucherAdd.discount / 100 * cart.itemsPrice;
+              cart.totalPrice -= cart.discountPrice
+            } else {
+              let discountPrice = voucherAdd.discount / 100 * cart.itemsPrice;
+              if (voucherAdd.maxValue < discountPrice) {
+                discountPrice = voucherAdd.maxValue;
+              }
+              cart.discountPrice = discountPrice
+              cart.totalPrice -= discountPrice
+            }
+            break;
+          }
+          case 3: {
+            cart.discountPrice = voucherAdd.discount;
+            cart.totalPrice -= cart.discountPrice;
+            break;
+          }
+          default:
+            break;
+        }
+      }
+    }
+  }
   const placeOrderHandler = (e) => {
     e.preventDefault();
     dispatch(createOrder({
@@ -138,7 +119,9 @@ const PlaceOrderScreen = () => {
       itemsPrice: cart.itemsPrice,
       taxPrice: cart.taxPrice,
       shippingPrice: cart.shippingPrice,
+      discountPrice: cart.discountPrice,
       totalPrice: cart.totalPrice,
+      voucherID
     }))
   };
 
@@ -286,7 +269,7 @@ const PlaceOrderScreen = () => {
                     <strong>Mã Giảm giá: </strong>
                   </td>
                   <td style={{"color": "red"}}>
-                    {CurrencyFormatter(-100000000)}
+                    {CurrencyFormatter(cart.discountPrice !== undefined ? cart.discountPrice : 0)}
                     {/* <CurrencyFormat value={cart.taxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
                   </td>
                 </tr>
@@ -301,9 +284,29 @@ const PlaceOrderScreen = () => {
                 </tr>
               </tbody>
             </table>
-            <button type="button" className="btn-add-voucher" onClick={() => setShowModal(true)}>
-              <b>Thêm mã giảm giá</b>
-            </button>
+            <div className="add-voucher w-100">
+              <button type="button" className="btn-add-voucher" onClick={() => setShowModal(true)}>
+                <b>Thêm mã giảm giá</b>
+              </button>
+              {voucherID &&
+                <div className="d-flex flex-row">
+                  <div className="alert alert-success">
+                    <span>Mã giảm giá: </span>
+                    <span>
+                      <span className="add-voucher-id">{voucherID + " "}</span>
+                      <Link onClick={() => {
+                        setVoucherID("")
+                        cart.discountPrice = 0;
+                      }
+                      } className="delete-voucher">
+                        <i className="fas fa-trash"></i>
+                      </Link>
+                    </span>
+                  </div>
+                </div>
+              }
+            </div>
+            
             {
               cart.cartItems.length === 0 ? null : (
                 <button className="" type="submit" onClick={placeOrderHandler}>
@@ -324,7 +327,7 @@ const PlaceOrderScreen = () => {
       <CalltoActionSection />
       <ContactInfo />
       <Footer />
-      {showModal && <AddVoucherModal showModal={showModal} setShowModal={setShowModal} listVoucher={ voucherItems} />}
+      {showModal && <AddVoucherModal setVoucherID={setVoucherID} showModal={showModal} setShowModal={setShowModal} listVoucher={ voucherItems} />}
     </>
     
   );

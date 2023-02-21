@@ -836,9 +836,15 @@ form .input-group {
 .hide {
   display: none;
 }
-
+.voucher-section-item {
+  min-height: 180px;
+}
+.voucher-section-item .border-product {
+  height: 100%;
+}
 .voucher-card {
   position: relative;
+  /* height: 100%; */
 }
 
 .voucher-card .border-product {
@@ -868,16 +874,32 @@ form .input-group {
 .voucher-card .voucher-left-header.discount {
   background-color: #de6418;
 }
-
+.voucher-id {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .voucher-name {
   color: #000;
   font-size: 18px;
   font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .voucher-description {
   font-size: 14px;
-  padding: 0 10px;
+    /* padding: 0 10px; */
+  padding-left: 10px;
+  line-height: 1.3;
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 60px;
+  margin-bottom: 30px;
+}
+.voucher-description::-webkit-scrollbar{
+  display: none;
 }
 
 .voucher-abs {
@@ -906,7 +928,19 @@ form .input-group {
   margin-top: 20px
 }
 
-
+.table-bordered .add-voucher {
+  width: 100%;
+}
+.delete-voucher {
+  color: red;
+}
+.add-voucher-id {
+  padding: 2px;
+  border-radius: 5px;
+  background-color: #ebebeb;
+  border: 1px solid black;
+  margin: 0 10px
+}
 
 
 /* .voucher-expire, .voucher-active {

@@ -137,14 +137,15 @@ const Header = () => {
                       </div>
                     )
                   }
-                  
-                  <Link to="/vouchers" className="cart-mobile-icon">
-                    <i className="fas fa-ticket"></i>
-                  </Link>
-                  <Link to="/cart" className="cart-mobile-icon" style={{"margin-left": "10px"}}>
-                    <i className="fas fa-shopping-bag"></i>
-                    <span className="badge">{userInfo && cartItems.length}</span>
-                  </Link>
+                  {userInfo && <>
+                    <Link to="/vouchers" className="cart-mobile-icon">
+                      <i className="fas fa-ticket"></i>
+                    </Link>
+                    <Link to="/cart" className="cart-mobile-icon" style={{"margin-left": "10px"}}>
+                      <i className="fas fa-shopping-bag"></i>
+                      <span className="badge">{userInfo && cartItems.length}</span>
+                    </Link>
+                  </>}
                 </div>
                 
                 <div className="col-12 d-flex align-items-center">
@@ -280,14 +281,15 @@ const Header = () => {
                   )
                 }
                 
-
-                <Link to="/vouchers" title="Mã giảm giá">
-                  <i className="fas fa-ticket"></i>
-                </Link>
-                <Link to="/cart" style={{ "margin-left": "15px" }} title="Giỏ hàng">
-                    <i className="fas fa-shopping-cart"></i>
-                    <span className="badge">{userInfo && cartItems.length}</span>
-                </Link>
+                {userInfo && <>
+                  <Link to="/vouchers" title="Mã giảm giá">
+                    <i className="fas fa-ticket"></i>
+                  </Link>
+                  <Link to="/cart" style={{ "margin-left": "15px" }} title="Giỏ hàng">
+                      <i className="fas fa-shopping-cart"></i>
+                      <span className="badge">{userInfo && cartItems.length}</span>
+                  </Link>
+                </>}
               </div>
             </div>
             <div className="row header_main">

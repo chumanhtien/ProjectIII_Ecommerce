@@ -83,7 +83,7 @@ const VoucherEditMain = (props) => {
         setExpireAt(voucher.expireAt);
       }
     }
-  }, [dispatch, id, successUpdate, success, voucher.name, voucher.isActive])
+  }, [dispatch, id, successUpdate, success, voucher.name, voucher.description, voucher.type, voucher.minValueOfOrderRequire, voucher.maxValue, voucher.isActive, voucher.expireAt])
   return (
     <>
       <Toast/>

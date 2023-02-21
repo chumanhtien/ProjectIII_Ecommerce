@@ -5,13 +5,18 @@ import "./Modal.css"
 const AddVoucherModal = (props) => {
 
   const {listVoucher} = props 
-  const { showModal, setShowModal } = props;
+  const { showModal, setShowModal, setVoucherID } = props;
   const [voucherChecked, setVoucherChecked] = useState("")
   const toggleModal = () => {
     setShowModal(!showModal)
   }
 
-  console.log(voucherChecked)
+  const submitHandler = (id) => {
+    setVoucherID(id);
+    toggleModal();
+  }
+
+  // console.log(voucherChecked)
   
   return (
     <div class="modal-container">
@@ -67,7 +72,7 @@ const AddVoucherModal = (props) => {
         </div>
         
         <div className="d-flex flex-row justify-content-around mt-2">
-          <button onClick={() => toggleModal()} className="btn btn-success">Xác nhận</button>
+          <button onClick={() => submitHandler(voucherChecked)} className="btn btn-success">Xác nhận</button>
           <button onClick={() => toggleModal()} className="btn btn-danger">Hủy</button>
         </div>
       </div>

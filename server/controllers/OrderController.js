@@ -5,6 +5,7 @@ import ManClothes from "../Models/ProductModels/ManClothesModel.js";
 import Mobile from "../Models/ProductModels/MobileModel.js";
 import Shoe from "../Models/ProductModels/ShoeModel.js";
 import Toy from "../Models/ProductModels/ToyModel.js";
+import User from "../Models/UserModel.js";
 
 
 export const createOrder = asyncHandler(async (req, res) => {
@@ -15,8 +16,12 @@ export const createOrder = asyncHandler(async (req, res) => {
         itemsPrice,
         taxPrice,
         shippingPrice,
+        discountPrice,
         totalPrice,
+        voucherID
     } = req.body;
+
+    console.log(req.body)
 
     if (orderItems && orderItems.length === 0) {
         res.status(400);
@@ -30,7 +35,9 @@ export const createOrder = asyncHandler(async (req, res) => {
             itemsPrice,
             taxPrice,
             shippingPrice,
+            discountPrice,
             totalPrice,
+            voucherID
         });
 
         const createOrder = await order.save();
@@ -49,6 +56,15 @@ export const createOrder = asyncHandler(async (req, res) => {
                     console.log(`New CountInStock of ${updatedProduct.name} after updated is: ${updatedProduct.countInStock}`);
             }
         }
+        //update VoucherID
+        if (voucherID) {
+            const user = await User.findById(req.user._id)
+            if (user) {
+                user.listVouchers = user.listVouchers.filter((voucher) => JSON.stringify(voucher._id) !== JSON.stringify(voucherID))
+            }
+            await user.save()
+        }
+        
     
         res.status(201).json(createOrder);
     }

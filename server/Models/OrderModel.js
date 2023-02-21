@@ -59,6 +59,16 @@ const orderSchema = mongoose.Schema({
             required: true,
             default: 0.0
         },
+        discountPrice: {
+            type: Number,
+            required: true,
+            default: 0,
+        },
+        voucherID: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            // default: ""
+        },
         totalPrice: {
             type: Number,
             required: true,
@@ -85,6 +95,12 @@ const orderSchema = mongoose.Schema({
         deliveredAt: {
             type: Date,
         },
+        returnState: {
+            type: Number,
+            //1: yeu cau tra // 2: dong y// 3: tu choi // 0: chua yeu cau
+            required: true,
+            default: 0,
+        }
     },
     {
         timestamps: true

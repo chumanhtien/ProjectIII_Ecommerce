@@ -8,7 +8,7 @@ import Toy from "../Models/ProductModels/ToyModel.js";
 
 
 export const getCartOfUserLogin = asyncHandler(async (req, res) => {
-  const { userID } = req.body;
+  const userID = req.body;
   const lastCart = await Cart.findOne({...userID})
 
   let cartInfoToLocal = {cartItems: []}
@@ -17,7 +17,7 @@ export const getCartOfUserLogin = asyncHandler(async (req, res) => {
       cartInfoToLocal.cartItems = await Promise.all(
         lastCart.cartItems.map(async (cartItem) => {
           const category = cartItem.category
-          console.log(cartItem)
+          // console.log(cartItem)
           let cartItemInfo = {}
           switch (category) {
             case 'shoes': {
@@ -85,7 +85,7 @@ export const saveCartFromLocalStoragetoDB = asyncHandler(async (req, res) => {
     // ]
 
     if (cartItems) {
-      console.log(cartItems);
+      // console.log(cartItems);
       let cartItemsToDB = cartItems.map((cartItem) => {
         return {
           productId: cartItem.productId,
@@ -112,7 +112,9 @@ export const saveCartFromLocalStoragetoDB = asyncHandler(async (req, res) => {
       
     }
   } catch (error) {
-    console.log(error.response.data.message)
+    // console.log(error.response.data.message)
+    res.status(401);
+    throw new Error("Lỗi: ", error.response.data.message)
   }
     
 })

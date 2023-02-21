@@ -49,6 +49,13 @@ voucherRouter.put(
   VoucherController.updateVoucher
 )
 
+//GET VOUCHERS OF USERS
+voucherRouter.get(
+  "/user/all",
+  protect,
+  VoucherController.getAllVouchersOfUser
+)
+
 //GET
 
 export default voucherRouter

@@ -247,19 +247,19 @@ const NewsSection = (props) => {
             
                 {/* Pagination */}
                 {pages > 1 && (
-                  // <NewPagination
-                  //   pages={pages} 
-                  //   page={page} 
-                    // keyword={keyword ? keyword : ""}
-                    // filterByID={filterByID}
-                  // />
-                  <Pagination
-                    pages={pages}
-                    page={page}
+                  <NewPagination
+                    pages={pages} 
+                    page={page} 
                     keyword={keyword ? keyword : ""}
                     filterByID={filterByID}
-                    category={category}
                   />
+                  // <Pagination
+                  //   pages={pages}
+                  //   page={page}
+                  //   keyword={keyword ? keyword : ""}
+                  //   filterByID={filterByID}
+                  //   category={category}
+                  // />
                 )}
                 
               </div>
