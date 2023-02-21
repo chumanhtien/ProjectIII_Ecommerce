@@ -17,8 +17,8 @@ const ToastObjects = {
 
 const AddNewsMain = () => {
 
-  const [category, setCategory] = useState("");
-  console.log("categoty: ", category);
+  // const [category, setCategory] = useState("");
+  // console.log("categoty: ", category);
   
   const [title, setTitle] = useState("");
   const [sourceID, setSourceID] = useState("");
@@ -73,7 +73,7 @@ const AddNewsMain = () => {
     <>
     <Toast/>
       <section className="content-main" style={{ maxWidth: "1200px" }}>
-        <form onSubmit={(e) => submitHandler(e, category)}>
+        <form onSubmit={(e) => submitHandler(e)}>
           <div className="content-header">
             <Link to="/news" className="btn btn-danger text-white">
               Trở lại trang Tin tức

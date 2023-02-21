@@ -4,6 +4,7 @@ import {composeWithDevTools} from "redux-devtools-extension";
 import { adminUpdateProfileReducer, userAddByAdminReducer, userBlockedReducer, userDeleteByAdminReducer, userEditInfoByAdminReducer, userInfoDetailsReducer, userListReducer, userLoginReducer, userUnBlockedReducer } from "./Reducers/UserReducers";
 import { categoryAddByAdminReducer, categoryDeleteByAdminReducer, categoryEditByAdminReducer, categoryInfoDetailsReducer, newsDeleteByAdminReducer, productCreateReducer, productDeleteReducer, productEditReducer, productGetAllReducer, productListCategoriesReducer, productListNewsReducer, productSingleDetailsReducer, productUpdateReducer, singleNewsAddByAdminReducer, singleNewsDetailReducer } from "./Reducers/ProductReducers";
 import { orderAdminGetUserOrdersReducer, orderListReducer, orderMarkConfirmedReducer, orderMarkDeliveredReducer, orderSingleDetailsReducer } from "./Reducers/OrderReducers";
+import { addSingleVoucherAdminReducer, deleteSingleVoucherReducer, voucherGetAllReducer, voucherGetSingleDetailReducer, voucherUpdateReducer } from "./Reducers/VoucherReducers";
 
 
 const reducer = combineReducers({
@@ -44,7 +45,14 @@ const reducer = combineReducers({
     orderMarkDelivered: orderMarkDeliveredReducer,
     orderMarkConfirmed: orderMarkConfirmedReducer,
     orderAdminGetUserOrders: orderAdminGetUserOrdersReducer,
-});
+
+    //voucher
+    voucherList: voucherGetAllReducer,
+    voucherSingleDetail: voucherGetSingleDetailReducer,
+    voucherSingleAdd: addSingleVoucherAdminReducer,
+    voucherSingleDelete: deleteSingleVoucherReducer,
+    voucherSingleUpdate: voucherUpdateReducer
+}); 
 
 
 

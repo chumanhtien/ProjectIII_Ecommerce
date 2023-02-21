@@ -110,6 +110,10 @@ function App() {
             <Route path="/vouchers/page/:pageNumber" element={<VoucherScreen/>} />
             <Route path="/vouchers/:filter/page/:pageNumber" element={<VoucherScreen/>} />
             <Route path="/vouchers/:filter" element={<VoucherScreen />} />
+            <Route path="/vouchers/search/:keyword" element={<VoucherScreen/>} />
+            <Route path="/vouchers/:filter/search/:keyword" element={<VoucherScreen/>} />
+            <Route path="/vouchers/search/:keyword" element={<VoucherScreen/>} />
+            <Route path="/vouchers/:filter/search/:keyword/page/:pageNumber" element={<VoucherScreen/>} />
             {/* <Route path="/products/shoes/:id/edit" element={<ProductEditScreen/>} /> */}
             <Route path="/products/:category/:id/edit" element={<ProductEditScreen/>} />
             <Route path="/products/:category/:id" element={<SingleProduct/>}></Route>

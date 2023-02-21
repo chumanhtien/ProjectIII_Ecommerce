@@ -14,7 +14,6 @@ voucherRouter.get(
 //GET A SINGLE VOUCHER 
 voucherRouter.get(
   "/:id",
-  // admin,
   VoucherController.getVoucherById
 );
 
@@ -33,5 +32,23 @@ voucherRouter.delete(
   admin,
   VoucherController.deleteVoucher
 );
+
+//GET ALL VOUCHERS BY ADMIN
+voucherRouter.get(
+  "/admin/all",
+  protect,
+  admin,
+  VoucherController.getAllVouchersByAdmin
+)
+
+//UPDATE VOUCHER BY ADMIN
+voucherRouter.put(
+  "/edit/:id",
+  protect,
+  admin,
+  VoucherController.updateVoucher
+)
+
+//GET
 
 export default voucherRouter

@@ -36,6 +36,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { ORDER_ADMIN_GET_ORDERS_OF_USER_RESET } from "../Constants/OrderConstants";
 import { URL } from "../URL";
+import { VOUCHER_ADMIN_GET_ALL_RESET } from "../Constants/VoucherConstants";
  
 //LOGIN
 export const login = (email, password) => async(dispatch) => {
@@ -89,7 +90,8 @@ export const logout = () => (dispatch) => {
     dispatch({type: USER_LIST_RESET});
     dispatch({type: USER_ADMIN_GET_USER_RESET});
     dispatch({type: ORDER_ADMIN_GET_ORDERS_OF_USER_RESET});
-    dispatch({type: USER_ADMIN_EDIT_USER_RESET})
+    dispatch({ type: USER_ADMIN_EDIT_USER_RESET })
+    dispatch({ type: VOUCHER_ADMIN_GET_ALL_RESET })
     // document.location.href="/login";
 }
 

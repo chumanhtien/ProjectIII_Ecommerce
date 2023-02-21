@@ -7,14 +7,14 @@ import VoucherEditMain from "../../components/vouchers/VoucherEditMain";
 const EditVoucherScreen = () => {
   // const productId = products.find((p) => p._id === match.params.id);
   const {id} = useParams();
-  console.log("id: ", id);
+  // console.log("id: ", id, category);
   
   return (
     <>
       <Sidebar />
       <main className="main-wrap">
         <Header />
-        <VoucherEditMain id={id} />
+        <VoucherEditMain id={id}/>
       </main>
     </>
   );

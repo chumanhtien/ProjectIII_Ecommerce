@@ -31,6 +31,9 @@
   .input-group {
     margin-bottom: 1rem;
   }
+  .voucher-sub-title {
+    display: none;
+  }
 }
 @media all and (max-width: 768px) {
   /* mobile devices */

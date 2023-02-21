@@ -37,13 +37,13 @@ const MainNews = () => {
   let pages = 0;  
   
   let page = Number(useParams().pageNumber);
-  console.log(page);
+  // console.log(page);
   if (!page)
     page = 1;
 
   //Search
   const [keyword, setKeyword] = useState('');
-  console.log(keyword);
+  // console.log(keyword);
 
 
   // const products = dtddProducts;
