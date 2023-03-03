@@ -29,10 +29,10 @@ const SingleProduct = () => {
     console.log(product);
   }
   useEffect(() => {
-    if (!product || product._id !== id) {
-        dispatch(getSingleDetails(category, id));
-      } 
-  }, [dispatch, category, id]);
+    
+    dispatch(getSingleDetails(category, id));
+      
+  }, [dispatch, category, id, product.name, product.countInStock, product.price]);
 
 
   return (
@@ -60,7 +60,7 @@ const SingleProduct = () => {
                           <h5>Giá</h5>
                           {/* <CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span>{value}</span>} /> */}
 
-                          <span>{CurrencyFormatter(product.price)}</span>
+                          <span>{CurrencyFormatter(product.price*1000)}</span>
                           </div>
                           <div className="flex-box d-flex justify-content-between align-items-center">
                           <h5>Trạng thái</h5>

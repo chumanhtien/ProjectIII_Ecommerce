@@ -143,7 +143,7 @@ const Header = () => {
                     </Link>
                     <Link to="/cart" className="cart-mobile-icon" style={{"margin-left": "10px"}}>
                       <i className="fas fa-shopping-bag"></i>
-                      <span className="badge">{userInfo && cartItems.length}</span>
+                      <span className="badge">{userInfo && cartItems?.length}</span>
                     </Link>
                   </>}
                 </div>

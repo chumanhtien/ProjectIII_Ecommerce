@@ -27,7 +27,7 @@ const TopTotal = (props) => {
             <div className="text">
               <h6 className="mb-1">Doanh thu</h6> 
               {/* <CurrencyFormat value={totalSales} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span>{value}</span>} /> */}
-              <span>{CurrencyFormatter(totalSales)}</span>
+              <span>{CurrencyFormatter(totalSales*1000)}</span>
             </div>
           </article>
         </div>

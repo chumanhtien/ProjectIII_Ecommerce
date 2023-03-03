@@ -47,12 +47,12 @@ const OrderDetailProducts = (props) => {
                 </Link>
               </td>
 
-              <td>{CurrencyFormatter(orderItem.price)} </td>
+              <td>{CurrencyFormatter(orderItem.price * 1000)} </td>
               {/* <CurrencyFormat value={orderItem.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <td>{value} </td>} /> */}
 
               <td>{orderItem.qty} </td>
               
-              <td className="text-end">{CurrencyFormatter(orderItem.price * orderItem.qty)}</td>
+              <td className="text-end">{CurrencyFormatter(orderItem.price * orderItem.qty * 1000)}</td>
               {/* <CurrencyFormat value={orderItem.price * orderItem.qty} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <td className="text-end">{value}</td>} /> */}
 
             </tr>
@@ -65,17 +65,17 @@ const OrderDetailProducts = (props) => {
             <article className="float-end">
               <dl className="dlist">
                 <dt>Tiền sản phẩm:</dt> 
-                <dd>{CurrencyFormatter(order.itemsPrice)}</dd>
+                <dd>{CurrencyFormatter(order.itemsPrice*1000)}</dd>
                 {/* <CurrencyFormat value={order.itemsPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <dd>{value}</dd>} /> */}
 
               </dl>
               <dl className="dlist">
                 <dt>Phí vận chuyển:</dt> 
-                {order.shippingPrice ? <dd>{CurrencyFormatter(order.shippingPrice)}</dd> : <dd>Miễn phí</dd>}
+                {order.shippingPrice ? <dd>{CurrencyFormatter(order.shippingPrice*1000)}</dd> : <dd>Miễn phí</dd>}
                 
               </dl>
               <dl className="dlist"> 
-                <dt>VAT:</dt> <dd>{CurrencyFormatter(order.taxPrice)}</dd>
+                <dt>VAT:</dt> <dd>{CurrencyFormatter(order.taxPrice*1000)}</dd>
               </dl>
               {order.voucherID &&
                 <dl className="dlist"> 
@@ -83,12 +83,12 @@ const OrderDetailProducts = (props) => {
                 </dl>
               }
               <dl className="dlist"> 
-                <dt>Giảm giá:</dt> <dd style={{color: 'red'}}>{CurrencyFormatter(order.discountPrice)}</dd>
+                <dt>Giảm giá:</dt> <dd style={{color: 'red'}}>{CurrencyFormatter(order.discountPrice*1000)}</dd>
               </dl>
               <dl className="dlist">
                 <dt>Tổng chi phí:</dt>
                 <dd>
-                  <b className="h5">{CurrencyFormatter(order.totalPrice)}</b>
+                  <b className="h5">{CurrencyFormatter(order.totalPrice*1000)}</b>
                 </dd>
               </dl>
               <dl className="dlist">

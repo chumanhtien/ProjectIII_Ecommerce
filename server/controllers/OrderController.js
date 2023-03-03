@@ -21,52 +21,70 @@ export const createOrder = asyncHandler(async (req, res) => {
         voucherID
     } = req.body;
 
-    console.log(req.body)
+    // console.log(req.body)
 
     if (orderItems && orderItems.length === 0) {
         res.status(400);
         throw new Error("No order items");
     } else {
-        const order = new Order({
-            orderItems, 
-            user: req.user._id,
-            shippingAddress,
-            paymentMethod,
-            itemsPrice,
-            taxPrice,
-            shippingPrice,
-            discountPrice,
-            totalPrice,
-            voucherID
-        });
-
-        const createOrder = await order.save();
-        let product = {};
-        let updatedProduct = {};
-        for (let i = 0; i < orderItems.length; i++) {
-            product = await ((await Mobile.findById(orderItems[i].productId)) || (await Shoe.findById(orderItems[i].productId))
+        let isErrorProduct = false; let index = -1; let i = 0;
+        for (i = 0; i < orderItems.length; i++) {
+            let product = await ((await Mobile.findById(orderItems[i].productId)) || (await Shoe.findById(orderItems[i].productId))
                     || (await ManClothes.findById(orderItems[i].productId)) || (await BabyMom.findById(orderItems[i].productId))
-                    || (await Toy.findById(orderItems[i].productId)));
-            console.log("product: ", product.productId);
+                || (await Toy.findById(orderItems[i].productId)));
             if (product) {
-                console.log(`CountInStock of ${updatedProduct.name} is: ${updatedProduct.countInStock}`)
-                product.countInStock -= orderItems[i].qty;
-                updatedProduct = await product.save();
-                if (updatedProduct)
-                    console.log(`New CountInStock of ${updatedProduct.name} after updated is: ${updatedProduct.countInStock}`);
+                if (product.countInStock < orderItems[i].qty) {
+                    isErrorProduct = true;
+                    index = i;
+                    break;
+                }
             }
-        }
-        //update VoucherID
-        if (voucherID) {
-            const user = await User.findById(req.user._id)
-            if (user) {
-                user.listVouchers = user.listVouchers.filter((voucher) => JSON.stringify(voucher._id) !== JSON.stringify(voucherID))
-            }
-            await user.save()
-        }
-        
+        } 
+        if (isErrorProduct && index != -1) {
+            res.status(401);
+            throw new Error(`Sản phẩm có tên = ${orderItems[index].name}, cateogry = ${orderItems[index].category}, id = ${orderItems[index]._id} không đủ với số lượng đặt hàng của bạn, đặt hàng không thành công!`);
+        } else {
+            const order = new Order({
+                orderItems, 
+                user: req.user._id,
+                shippingAddress,
+                paymentMethod,
+                itemsPrice,
+                taxPrice,
+                shippingPrice,
+                discountPrice,
+                totalPrice,
+                voucherID
+            });
     
-        res.status(201).json(createOrder);
+            const createOrder = await order.save();
+            let product = {};
+            let updatedProduct = {};
+            for (let i = 0; i < orderItems.length; i++) {
+                product = await ((await Mobile.findById(orderItems[i].productId)) || (await Shoe.findById(orderItems[i].productId))
+                        || (await ManClothes.findById(orderItems[i].productId)) || (await BabyMom.findById(orderItems[i].productId))
+                        || (await Toy.findById(orderItems[i].productId)));
+                console.log("product: ", product.productId);
+                if (product) {
+                    // console.log(`CountInStock of ${updatedProduct.name} is: ${updatedProduct.countInStock}`)
+                    product.countInStock -= orderItems[i].qty;
+                    updatedProduct = await product.save();
+                    if (updatedProduct)
+                        console.log(`New CountInStock of ${updatedProduct.name} after updated is: ${updatedProduct.countInStock}`);
+                }
+            }
+            //update VoucherID
+            if (voucherID) {
+                const user = await User.findById(req.user._id)
+                if (user) {
+                    user.listVouchers = user.listVouchers.filter((voucher) => JSON.stringify(voucher._id) !== JSON.stringify(voucherID))
+                }
+                await user.save()
+            }
+            
+        
+            res.status(201).json(createOrder);
+        }
     }
 
 })

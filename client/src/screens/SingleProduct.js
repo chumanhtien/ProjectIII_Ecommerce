@@ -316,7 +316,7 @@ const SingleProduct = (props) => {
                       <div className="flex-box d-flex justify-content-between align-items-center">
                         <h6>Giá</h6>
                         {/* <CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span>{value}</span>} /> */}
-                        <span>{ CurrencyFormatter(product.price)}</span>
+                        <span>{ CurrencyFormatter(product.price*1000)}</span>
                       </div>
                       <div className="flex-box d-flex justify-content-between align-items-center">
                         <h6>Trạng thái</h6>

@@ -65,9 +65,9 @@ const orderSchema = mongoose.Schema({
             default: 0,
         },
         voucherID: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            // default: ""
+            type: String,
+            // required: true,
+            default: ""
         },
         totalPrice: {
             type: Number,

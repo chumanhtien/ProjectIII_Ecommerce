@@ -30,7 +30,7 @@ const Product = (props) => {
             </Link>
             <div className="price mb-2">
               {/* <CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
-              {CurrencyFormatter(product.price)}
+              {CurrencyFormatter(product.price*1000)}
             </div>
             <div className="row d-flex justify-content-evenly">
               <Link

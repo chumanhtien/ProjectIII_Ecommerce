@@ -86,7 +86,7 @@ const CartScreen = () => {
                   <img src={item.image} alt={item.name} />
                   <span className="cart-price">{`Giá: `}
                     {/* <CurrencyFormat value={item.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span style={{"font-weight": "normal", "font-size": "16px"}}>{value}</span>} /> */}
-                    <span style={{"font-weight": "normal", "font-size": "16px"}}>{CurrencyFormatter(item.price)}</span>
+                    <span style={{"font-weight": "normal", "font-size": "16px"}}>{CurrencyFormatter(item.price * 1000)}</span>
                   </span>
                   
                 </div>
@@ -121,7 +121,7 @@ const CartScreen = () => {
                 <div className="cart-price mt-4 mt-md-1 col-md-2 align-items-sm-end align-items-start  d-flex flex-column justify-content-start col-sm-7">
                   <h6>Tổng</h6>
                   {/* <CurrencyFormat value={item.price * item.qty} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <h4>{value}</h4>} /> */}
-                  <h4>{CurrencyFormatter(item.price * item.qty)}</h4>
+                  <h4>{CurrencyFormatter(item.price * item.qty * 1000)}</h4>
                 </div>
               </div>
             ))}
@@ -132,7 +132,7 @@ const CartScreen = () => {
               <span className="sub">Tổng tiền:</span>
               {/* <CurrencyFormat value={total} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span className="total-price">{value}</span>} /> */}
 
-              <span className="total-price">{CurrencyFormatter(total)}</span>
+              <span className="total-price">{CurrencyFormatter(total*1000)}</span>
             </div>
             <hr />
             <div className="cart-buttons d-flex align-items-center row">

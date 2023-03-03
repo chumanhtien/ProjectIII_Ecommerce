@@ -246,7 +246,7 @@ const EditProductMain = (props) => {
                     <div className="mb-3 d-flex flex-row justify-content-between">
                       <div className="col-lg-5">
                         <label htmlFor="product_price" className="form-label">
-                          Giá
+                          Giá (Ngàn đồng)
                         </label>
                         <input
                           type="number"

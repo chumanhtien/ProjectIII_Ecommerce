@@ -208,7 +208,7 @@ const PlaceOrderScreen = () => {
                           <h6 className="order-item-price">
                             <b>Giá: </b> 
                             {/* <CurrencyFormat value={item.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span style={{"fontWeight": "normal", "fontSize": "15px"}}>{value}</span>} /> */}
-                            <span style={{"fontWeight": "normal", "fontSize": "15px"}}>{CurrencyFormatter(item.price)}</span>
+                            <span style={{"fontWeight": "normal", "fontSize": "15px"}}>{CurrencyFormatter(item.price*1000)}</span>
                           </h6>
                         </div>
                         <div className="col-md-5 col-6 d-flex align-items-center">
@@ -224,7 +224,7 @@ const PlaceOrderScreen = () => {
                         <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                           <h4>CHI PHÍ</h4>
                           {/* <CurrencyFormat value={item.qty * item.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <h6>{value}</h6>} /> */}
-                          <h6>{CurrencyFormatter(item.qty * item.price)}</h6>
+                          <h6>{CurrencyFormatter(item.qty * item.price*1000)}</h6>
 
 
                         </div>
@@ -246,21 +246,21 @@ const PlaceOrderScreen = () => {
                   </td>
                   <td>
                   {/* <CurrencyFormat value={cart.itemsPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
-                    {CurrencyFormatter(cart.itemsPrice)}
+                    {CurrencyFormatter(cart.itemsPrice*1000)}
                   </td>
                 </tr>
                 <tr>
                   <td>
                     <strong>Phí vận chuyển</strong>
                   </td>
-                  <td>{cart.shippingPrice === 0 ? ("Miễn phí") : `${CurrencyFormatter(cart.shippingPrice)}`}</td>
+                  <td>{cart.shippingPrice === 0 ? ("Miễn phí") : `${CurrencyFormatter(cart.shippingPrice*1000)}`}</td>
                 </tr>
                 <tr>
                   <td>
                     <strong>VAT: </strong>
                   </td>
                   <td>
-                    {CurrencyFormatter(cart.taxPrice)}
+                    {CurrencyFormatter(cart.taxPrice*1000)}
                     {/* <CurrencyFormat value={cart.taxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
                   </td>
                 </tr>
@@ -269,7 +269,7 @@ const PlaceOrderScreen = () => {
                     <strong>Mã Giảm giá: </strong>
                   </td>
                   <td style={{"color": "red"}}>
-                    {CurrencyFormatter(cart.discountPrice !== undefined ? cart.discountPrice : 0)}
+                    {CurrencyFormatter(cart.discountPrice !== undefined ? cart.discountPrice * 1000 : 0)}
                     {/* <CurrencyFormat value={cart.taxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
                   </td>
                 </tr>
@@ -278,7 +278,7 @@ const PlaceOrderScreen = () => {
                     <strong style={{"color": "#1cb803"}}>Tổng cộng</strong>
                   </td>
                   <td >
-                    {CurrencyFormatter(cart.totalPrice)}
+                    {CurrencyFormatter(cart.totalPrice*1000)}
                     {/* <CurrencyFormat value={cart.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <b>{value}</b>} /> */}
                   </td>
                 </tr>

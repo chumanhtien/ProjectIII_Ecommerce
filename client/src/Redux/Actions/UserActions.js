@@ -3,6 +3,7 @@ import { CART_SAVE_FROM_DB } from "../Constants/CartConstants";
 import { ORDER_GET_ALL_USER_ORDER_RESET } from "../Constants/OrderConstants";
 import { USER_INFO_FAIL, USER_INFO_REQUEST, USER_INFO_RESET, USER_INFO_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_REGISTER_FAIL, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS } from "../Constants/UserConstants"
 import { URL } from "../URL";
+import { saveCartStateFromDB } from "./CartActions";
 
 // LOGIN
 export const login = (email, password) => async (dispatch, getState) => {
@@ -20,7 +21,7 @@ export const login = (email, password) => async (dispatch, getState) => {
             config
         );
         dispatch({type: USER_LOGIN_SUCCESS, payload: data});
-        await localStorage.setItem("userInfo", JSON.stringify(data));
+        localStorage.setItem("userInfo", JSON.stringify(data));
         const { userLogin: { userInfo }
         } = getState(); 
         if (userInfo) {
@@ -34,21 +35,22 @@ export const login = (email, password) => async (dispatch, getState) => {
                     // Authorization: `Bearer ${token}`,
                 },
             }; 
-
+            // dispatch(saveCartStateFromDB())
             const { data } = await axios.get(
                 `${URL}/api/cart`,
                 { userID: userID },
                 config
             );
 
-            // if (data)
-            //     console.log(data)
-
-            dispatch({
-                type: CART_SAVE_FROM_DB,
-                payload: data.cartItems
-            })
-            localStorage.setItem("cartItems", JSON.stringify(data.cartItems))
+            if (data) {
+                localStorage.setItem("cartItems", JSON.stringify(data.cartItems))
+                dispatch({
+                    type: CART_SAVE_FROM_DB,
+                    payload: data.cartItems
+                })
+            }
+            
+            
         }
     } catch (error) {
         dispatch({

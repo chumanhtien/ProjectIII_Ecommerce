@@ -38,7 +38,7 @@ const Orders = (props) => {
             <td>{order.user.email}</td>
             <td>
               {/* ${order.totalPrice} */}
-              <span>{CurrencyFormatter(order.totalPrice)}</span>
+              <span>{CurrencyFormatter(order.totalPrice * 1000)}</span>
               {/* <CurrencyFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span>{value}</span>} /> */}
             </td>
             <td>

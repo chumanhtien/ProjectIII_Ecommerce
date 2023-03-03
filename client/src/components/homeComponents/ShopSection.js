@@ -192,7 +192,7 @@ const ShopSection = (props) => {
                             value={product.rating}
                             text={`${product.numReviews} reviews`}
                           />
-                          <h3>{CurrencyFormatter(product.price)}</h3>
+                          <h3>{CurrencyFormatter(product.price * 1000)}</h3>
                           {/* <CurrencyFormat value={product.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <h3>{value}</h3>} /> */}
 
                         </div>

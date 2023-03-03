@@ -214,7 +214,7 @@ const OrderScreen = () => {
                               <img src={item.image} alt={item.name} />
                               <h6 className="order-item-price">
                                 <b>Giá: </b> 
-                                <span style={{"fontWeight": "normal", "fontSize": "15px"}}>{ CurrencyFormatter(item.price)}</span>
+                                <span style={{"fontWeight": "normal", "fontSize": "15px"}}>{ CurrencyFormatter(item.price * 1000)}</span>
                                 {/* <CurrencyFormat value={item.price} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <span style={{"fontWeight": "normal", "fontSize": "15px"}}>{value}</span>} /> */}
                               </h6>
                             </div>
@@ -231,7 +231,7 @@ const OrderScreen = () => {
                             <div className="mt-3 mt-md-0 col-md-2 col-6 align-items-end  d-flex flex-column justify-content-center ">
                               <h4>CHI PHÍ</h4>
                               {/* <CurrencyFormat value={item.price * item.qty} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <h6>{value}</h6>} /> */}
-                              <h6>{CurrencyFormatter(item.qty * item.price)}</h6>
+                              <h6>{CurrencyFormatter(item.qty * item.price * 1000)}</h6>
                             </div>
                           </div>
                         ))
@@ -251,14 +251,14 @@ const OrderScreen = () => {
                         </td>
                         <td>
                           {/* <CurrencyFormat value={order.itemsPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
-                          {CurrencyFormatter(order.itemsPrice)}
+                          {CurrencyFormatter(order.itemsPrice*1000)}
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <strong>Phí vận chuyển</strong>
                         </td>
-                        <td>{order.shippingPrice === 0 ? ("Miễn phí") : `${CurrencyFormatter(order.shippingPrice)}`}</td>
+                        <td>{order.shippingPrice === 0 ? ("Miễn phí") : `${CurrencyFormatter(order.shippingPrice*1000)}`}</td>
                       </tr>
                       <tr>
                         <td>
@@ -266,16 +266,16 @@ const OrderScreen = () => {
                         </td>
                         <td>
                           {/* <CurrencyFormat value={order.taxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
-                          {CurrencyFormatter(order.taxPrice)}
+                          {CurrencyFormatter(order.taxPrice*1000)}
                         </td>
                       </tr>
                       <tr>
                         <td>
                           <strong>Mã giảm giá</strong>
                         </td>
-                        <td>
+                        <td style={{color: 'red'}}>
                           {/* <CurrencyFormat value={order.taxPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
-                          {CurrencyFormatter(order.discountPrice)}
+                          {CurrencyFormatter(order.discountPrice*1000)}
                         </td>
                       </tr>
                       <tr>
@@ -284,7 +284,7 @@ const OrderScreen = () => {
                         </td>
                         <td>
                           {/* <CurrencyFormat value={order.totalPrice} displayType={'text'} thousandSeparator={true} prefix={'$'} renderText={value => <>{value}</>} /> */}
-                          {CurrencyFormatter(order.totalPrice)}
+                          {CurrencyFormatter(order.totalPrice*1000)}
                         </td>
                       </tr>
                     </tbody>

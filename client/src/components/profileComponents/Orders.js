@@ -56,7 +56,7 @@ const Orders = (props) => {
                               ? moment(order.paidAt).calendar() 
                               : moment(order.createdAt).calendar()}
                             </td>
-                            <td>{CurrencyFormatter(order.totalPrice)}</td>
+                            <td>{CurrencyFormatter(order.totalPrice*1000)}</td>
                           </tr>
                         ))
                       }

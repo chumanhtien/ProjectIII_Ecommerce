@@ -6,7 +6,6 @@ import Mobile from "../Models/ProductModels/MobileModel.js";
 import Shoe from "../Models/ProductModels/ShoeModel.js";
 import Toy from "../Models/ProductModels/ToyModel.js";
 
-
 export const getCartOfUserLogin = asyncHandler(async (req, res) => {
   const userID = req.body;
   const lastCart = await Cart.findOne({...userID})
@@ -97,11 +96,12 @@ export const saveCartFromLocalStoragetoDB = asyncHandler(async (req, res) => {
           size: cartItem.types.size
         }
       })
+      // console.log("cartToDB: ", cartItemsToDB);
       
-      let lastCart = await Cart.findOne({ userID: userID })
+      let lastCart = await Cart.findOne({ ...userID })
       if (lastCart) {
         lastCart.cartItems = cartItemsToDB
-        lastCart.save()
+        await lastCart.save()
         if (lastCart) {
           res.json(lastCart)
         } else {
